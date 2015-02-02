@@ -16,6 +16,8 @@ var plumber = require('gulp-plumber');
 var tools = require('aurelia-tools');
 var protractor = require("gulp-protractor").protractor;
 var webdriver_update = require('gulp-protractor').webdriver_update;
+//var run = require('gulp-run');
+var shell = require('gulp-shell');
 
 var path = {
   source:'src/**/*.js',
@@ -26,6 +28,10 @@ var path = {
   e2eSpecsSrc: 'test/e2e/src/*.js',
   e2eSpecsDist: 'test/e2e/dist/'
 };
+
+var bundles = [
+    'bundled'
+];
 
 var compilerOptions = {
   filename: '',
@@ -55,8 +61,7 @@ var compilerOptions = {
 var jshintConfig = {esnext:true};
 
 gulp.task('clean', function() {
- return gulp.src([path.output])
-    .pipe(vinylPaths(del));
+	return gulp.src([path.output]).pipe(vinylPaths(del));
 });
 
 gulp.task('build-system', function () {
@@ -66,6 +71,13 @@ gulp.task('build-system', function () {
     .pipe(to5(assign({}, compilerOptions, {modules:'system'})))
     .pipe(gulp.dest(path.output));
 });
+
+gulp.task('build-bundles',
+	shell.task(
+		bundles.map(function (bundle) {
+			return 'jspm bundle ' + path.output + 'main ' + path.output + bundle + '.js --inject';
+		}))
+)
 
 gulp.task('build-html', function () {
   return gulp.src(path.html)
@@ -111,6 +123,7 @@ gulp.task('build', function(callback) {
   return runSequence(
     'clean',
     ['build-system', 'build-html'],
+	'build-bundles',
     callback
   );
 });
