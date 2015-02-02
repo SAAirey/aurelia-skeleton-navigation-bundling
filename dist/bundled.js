@@ -272,7 +272,7 @@ System.register("github:aurelia/metadata@0.3.1/system/metadata", [], function(_e
           locator: function locator(loc) {
             if (locateFunctionMetadataElsewhere === undefined) {
               locateFunctionMetadataElsewhere = loc;
-              return ;
+              return;
             }
             var original = locateFunctionMetadataElsewhere;
             locateFunctionMetadataElsewhere = function(fn) {
@@ -525,25 +525,25 @@ System.register("github:aurelia/logging@0.2.2/system/index", [], function(_expor
   }
   function debug() {
     if (logLevel < 4) {
-      return ;
+      return;
     }
     log(this, "debug", arguments);
   }
   function info() {
     if (logLevel < 3) {
-      return ;
+      return;
     }
     log(this, "info", arguments);
   }
   function warn() {
     if (logLevel < 2) {
-      return ;
+      return;
     }
     log(this, "warn", arguments);
   }
   function error() {
     if (logLevel < 1) {
-      return ;
+      return;
     }
     log(this, "error", arguments);
   }
@@ -986,7 +986,7 @@ System.register("github:aurelia/binding@0.3.2/system/event-manager", [], functio
           ensureDelegatedEvent: {
             value: function ensureDelegatedEvent(eventName) {
               if (this.delegatedEvents[eventName]) {
-                return ;
+                return;
               }
               this.delegatedEvents[eventName] = true;
               document.addEventListener(eventName, this.handleDelegatedEvent.bind(this), false);
@@ -1441,7 +1441,7 @@ System.register("github:aurelia/binding@0.3.2/system/array-change-records", [], 
       if (splice.addedCount == 1 && splice.removed.length == 1) {
         if (splice.removed[0] !== array[splice.index])
           splices.push(splice);
-        return ;
+        return;
       }
       ;
       splices = splices.concat(calcSplices(array, splice.index, splice.index + splice.addedCount, splice.removed, 0, splice.removed.length));
@@ -2811,7 +2811,7 @@ System.register("github:aurelia/binding@0.3.2/system/binding-expression", ["./bi
               if (this.mode == ONE_WAY || this.mode == TWO_WAY) {
                 if (this._disposeObserver) {
                   if (this.source === source) {
-                    return ;
+                    return;
                   }
                   this.unbind();
                 }
@@ -2917,7 +2917,7 @@ System.register("github:aurelia/binding@0.3.2/system/listener-expression", [], f
               var _this = this;
               if (this._disposeListener) {
                 if (this.source === source) {
-                  return ;
+                  return;
                 }
                 this.unbind();
               }
@@ -3007,7 +3007,7 @@ System.register("github:aurelia/binding@0.3.2/system/name-expression", [], funct
             value: function bind(source) {
               if (this.source) {
                 if (this.source === source) {
-                  return ;
+                  return;
                 }
                 this.unbind();
               }
@@ -3079,7 +3079,7 @@ System.register("github:aurelia/binding@0.3.2/system/call-expression", [], funct
             value: function bind(source) {
               var _this = this;
               if (this.source === source) {
-                return ;
+                return;
               }
               if (this.source) {
                 this.unbind();
@@ -3532,14 +3532,14 @@ System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["au
       ViewResources;
   function register(lookup, name, resource, type) {
     if (!name) {
-      return ;
+      return;
     }
     var existing = lookup[name];
     if (existing) {
       if (existing != resource) {
         throw new Error("Attempted to register " + type + " when one with the same name already exists. Name: " + name + ".");
       }
-      return ;
+      return;
     }
     lookup[name] = resource;
   }
@@ -3754,7 +3754,7 @@ System.register("github:aurelia/templating@0.8.7/system/view", [], function(_exp
               }
               if (this.isBound) {
                 if (this.executionContext === context) {
-                  return ;
+                  return;
                 }
                 this.unbind();
               }
@@ -3867,7 +3867,7 @@ System.register("github:aurelia/templating@0.8.7/system/view", [], function(_exp
                   i,
                   ii;
               if (this.isAttached) {
-                return ;
+                return;
               }
               this.isAttached = true;
               if (this.owner) {
@@ -3976,7 +3976,7 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
                   children;
               if (this.isBound) {
                 if (this.executionContext === executionContext) {
-                  return ;
+                  return;
                 }
                 this.unbind();
               }
@@ -4093,7 +4093,7 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
                   ii,
                   children;
               if (this.isAttached) {
-                return ;
+                return;
               }
               this.isAttached = true;
               children = this.children;
@@ -5330,7 +5330,7 @@ System.register("github:aurelia/framework@0.8.5/system/plugins", ["aurelia-loggi
                   info = this.info,
                   current;
               if (this.processed) {
-                return ;
+                return;
               }
               var next = function() {
                 if (current = info.shift()) {
@@ -6646,7 +6646,7 @@ System.register("github:aurelia/templating-router@0.9.2/system/router-view", ["a
                   suppressBind: true
                 });
                 if (waitToSwap) {
-                  return ;
+                  return;
                 }
                 _this.swap(viewPortInstruction);
               });
@@ -6839,7 +6839,7 @@ System.register("github:aurelia/templating-resources@0.8.4/system/if", ["aurelia
                   this.view.unbind();
                 }
                 this.showing = false;
-                return ;
+                return;
               }
               if (!this.view) {
                 this.view = this.viewFactory.create();
@@ -7248,7 +7248,7 @@ System.register("github:aurelia/templating-resources@0.8.4/system/selected-item"
                   if (this.element.selectedIndex !== i) {
                     this.element.selectedIndex = i;
                   }
-                  return ;
+                  return;
                 }
               }
               this.element.selectedIndex = 0;
@@ -7685,7 +7685,7 @@ System.register("github:aurelia/history-browser@0.2.3/system/index", ["aurelia-h
               }
               fragment = this.getFragment(fragment || "");
               if (this.fragment === fragment) {
-                return ;
+                return;
               }
               this.fragment = fragment;
               var url = this.root + fragment;
@@ -8227,7 +8227,7 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
             value: function addParameterInfoLocator(locator) {
               if (this.locateParameterInfoElsewhere === undefined) {
                 this.locateParameterInfoElsewhere = locator;
-                return ;
+                return;
               }
               var original = this.locateParameterInfoElsewhere;
               this.locateParameterInfoElsewhere = function(fn) {
@@ -8610,7 +8610,7 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
           addChangeRecord: {
             value: function addChangeRecord(changeRecord) {
               if (!this.callbacks.length) {
-                return ;
+                return;
               }
               this.changeRecords.push(changeRecord);
               if (!this.queued) {
@@ -8625,7 +8625,7 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
           reset: {
             value: function reset(oldArray) {
               if (!this.callbacks.length) {
-                return ;
+                return;
               }
               this.oldArray = oldArray;
               if (!this.queued) {
@@ -8724,7 +8724,7 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
                   i = callbacks.length,
                   splices;
               if (!i) {
-                return ;
+                return;
               }
               var splices = projectArraySplices(this.array, changeRecords);
               while (i--) {
@@ -10296,11 +10296,11 @@ System.register("github:aurelia/templating@0.8.7/system/view-factory", ["aurelia
     if (instruction.contentExpression) {
       bindings.push(instruction.contentExpression.createBinding(element.nextSibling));
       element.parentNode.removeChild(element);
-      return ;
+      return;
     }
     if (instruction.contentSelector) {
       contentSelectors.push(new ContentSelector(element, instruction.selector));
-      return ;
+      return;
     }
     if (behaviorInstructions.length) {
       containers[instruction.injectorId] = elementContainer = createElementContainer(containers[instruction.parentInjectorId], element, instruction, executionContext, children, resources);
@@ -13617,11 +13617,11 @@ System.register("github:aurelia/router@0.5.3/system/app-router", ["aurelia-depen
       AppRouter;
   function handleLinkClick(evt) {
     if (!this.isActive) {
-      return ;
+      return;
     }
     var target = evt.target;
     if (target.tagName != "A") {
-      return ;
+      return;
     }
     if (this.history._hasPushState) {
       if (!evt.altKey && !evt.ctrlKey && !evt.metaKey && !evt.shiftKey && targetIsThisWindow(target)) {
@@ -13733,12 +13733,12 @@ System.register("github:aurelia/router@0.5.3/system/app-router", ["aurelia-depen
             value: function dequeueInstruction() {
               var _this = this;
               if (this.isNavigating) {
-                return ;
+                return;
               }
               var instruction = this.queue.shift();
               this.queue = [];
               if (!instruction) {
-                return ;
+                return;
               }
               this.isNavigating = true;
               var context = this.createNavigationContext(instruction);
@@ -13788,7 +13788,7 @@ System.register("github:aurelia/router@0.5.3/system/app-router", ["aurelia-depen
           activate: {
             value: function activate(options) {
               if (this.isActive) {
-                return ;
+                return;
               }
               this.isActive = true;
               this.options = Object.assign({routeHandler: this.loadUrl.bind(this)}, this.options, options);
@@ -14313,7 +14313,7 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
                   key,
                   info;
               if (!this.isDynamic) {
-                return ;
+                return;
               }
               for (key in attributes) {
                 this.createDynamicProperty(executionContext, observerLookup, behaviorHandlesBind, key, attributes[key], boundProperties);
