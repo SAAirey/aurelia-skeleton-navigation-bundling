@@ -1,8 +1,6 @@
-# aurelia-skeleton-navigation
+# skeleton-navigation-bundling
 
-This skeleton is part of the [Aurelia](http://www.aurelia.io/) platform. It sets up a standard navigation-style app using gulp to build your ES6 code with the 6to5 compiler. Karma/Jasmine testing is also configured.
-
-> To keep up to date on [Aurelia](http://www.aurelia.io/), please visit and subscribe to [the official blog](http://blog.durandal.io/). If you have questions, we invite you to join us on [our Gitter Channel](https://gitter.im/aurelia/discuss).
+*This is a fork of the [aurelia-skeleton-navigation](https://github.com/aurelia/skeleton-navigation) repo inspired by @Alxandr's [mimosa-aurelia-skeleton](https://github.com/YoloDev/mimosa-aurelia-skeleton) project to demonstrate bundling with Aurelia and gulp*
 
 ## Running The App
 
@@ -38,52 +36,119 @@ To run the app, follow these steps.
   ```
 7. Browse to [http://localhost:9000](http://localhost:9000) to see the app. You can make changes in the code found under `src` and the browser should auto-refresh itself as you save files.
 
-> Note: At present there is a bug in the HTMLImports polyfill which only occurs on IE. We have submitted a pull request to the team with the fix. In the mean time, if you want to test on IE, you can work around the issue by explicitly adding a script tag before you load system.js. The script tag should look something like this (be sure to confirm the version number):
+## Changes/explanation
+
+First off, we've modified `index.html` to import our newly-added `main.js` file for manually bootstrapping the aurelia app using the [aurelia-bootstrapper](https://github.com/aurelia/bootstrapper):
 
 ```html
-<script src="jspm_packages/github/webcomponents/webcomponentsjs@0.5.2/HTMLImports.js"></script>
+<script>
+  System.baseUrl = 'dist'; //NOTE: You can move this into the config.js file, if you like.
+  System.import('./dist/main').catch(console.error.bind(console));
+</script>
 ```
 
-## Running The Unit Tests
+This loads our `dist/main.js` file which contains the following code to bootstrap and start aurelia:
 
-To run the unit tests, first ensure that you have followed the steps above in order to install all dependencies and successfully build the library. Once you have done that, proceed with these additional steps:
+```js
+bootstrap(aurelia => {
+  aurelia.use
+    .defaultBindingLanguage()
+    .defaultResources()
+    .router()
+    .eventAggregator();
 
-1. Ensure that the [Karma](http://karma-runner.github.io/) CLI is installed. If you need to install it, use the following command:
+  aurelia.start().then(a => a.setRoot('dist/app', document.body));
+});
+```
 
-  ```shell
-  npm install -g karma-cli
-  ```
-2. Install Aurelia libs for test visibility:
+It also includes an import for our `bundle.js` script which lets the bundler know what our dependencies are so that all required files are bundled:
+
+```js
+import './bundle';
+```
+
+Contents of the `bundle.js` file:
+
+```js
+// Aurelia framework
+import 'aurelia-bootstrapper';
+import 'aurelia-templating-binding';
+import 'aurelia-templating-router';
+import 'aurelia-templating-resources';
+import 'aurelia-event-aggregator';
+import 'aurelia-router';
+import 'aurelia-history';
+import 'aurelia-history-browser';
+
+// Behaviours
+import './nav-bar';
+
+// Routes/views
+import './app';
+import './child-router';
+import './flickr';
+import './welcome';
+```
+
+Now that's all setup, we can get on to the actual bundling and automation in gulp.
+
+Jspm is used for bundling via the `jspm bundle` command.
+
+This is setup in the `gulpfile.js` configuration file, we declare a bundles array as follows:
+
+```js
+var bundles = [
+    {
+        module: 'main',
+        name: 'bundled'
+    }
+];
+```
+
+We then create a gulp task `build-bundles` which uses [gulp-shell](https://www.npmjs.com/package/gulp-shell) to run the jspm command for each element of the array and then add it to the `build` task:
+
+```js
+gulp.task('build-bundles',
+    shell.task(
+        bundles.map(function (bundle) {
+            return 'jspm bundle ' + path.output + bundle.module + ' ' + path.output + bundle.name + '.js --inject';
+        }))
+)
+
+// .....
+
+gulp.task('build', function(callback) {
+  return runSequence(
+    'clean',
+    ['build-system', 'build-html'],
+    'build-bundles',
+    callback
+  );
+});
+```
+
+We're adding the bundles task after the build tasks in the sequence because we're telling jspm to look in the output folder. You can see the jspm output in the gulp output as follows:
+
+![gulp watch output](http://dev.saairey.co.uk/aurelia-skeleton-bundling/gulp-watch-output.png)
+
+The full syntax for the `jspm bundle` command is:
 
 ```shell
-jspm install aurelia-framework
-jspm install aurelia-http-client
-jspm install aurelia-router
+jspm bundle moduleA + module/b [outfile] [--minify] [--no-mangle] [--inject] [--skip-source-maps]
 ```
-3. You can now run the tests with this command:
 
-  ```shell
-  karma start
-  ```
+For our single bundle, our command will come out as `jspm dist/main dist/bundled.js --inject` which is taking the `dist/main.js` file as the module to bundle, following all dependencies, and outputting `dist/bundled.js` as the bundled file. The `--inject` parameter is telling jspm to inject the bundle config back into our configuration file (`config.js`).
 
-## Running The E2E Tests
-Integration tests are performed with [Protractor](http://angular.github.io/protractor/#/).
+Now that all this is setup, all we need to do is run `gulp watch`. You can see in the output that the jspm command is being
 
-1. Place your E2E-Tests into the folder ```test/e2e/src```
-2. Install the necessary webdriver
+Using your browser's developer tools, you can see that instead of over 100 requests to get our page up and running, we now only have around 20.
 
-  ```shell
-  gulp webdriver_update
-  ```
+Before:
 
-3. Configure the path to the webdriver by opening the file ```protractor.conf.js``` and adjusting the ```seleniumServerJar``` property. Typically its only needed to adjust the version number.
+![requests before](http://dev.saairey.co.uk/aurelia-skeleton-bundling/requests-before.png)
 
-4. Run the E2E-Tests
+After:
 
-  ```shell
-  gulp e2e
-  ```
+![requests after](http://dev.saairey.co.uk/aurelia-skeleton-bundling/requests-after.png)
 
-## Contributing
-
-We'd love for you to contribute to our source code and to make this project even better than it is today! If this interests you, please begin by reading [our contributing guidelines](https://github.com/DurandalProject/about/blob/master/CONTRIBUTING.md). The contributing document will provide you with all the information you need to get started. Once you have read that, you will need to also [sign our CLA](http://goo.gl/forms/dI8QDDSyKR) before we can accepts a Pull Request from you. More information on the process is including in the [contributor's guide](https://github.com/DurandalProject/about/blob/master/CONTRIBUTING.md).
+A working demo can be seen [here](http://dev.saairey.co.uk/aurelia-skeleton-bundling/)

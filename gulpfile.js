@@ -30,7 +30,10 @@ var path = {
 };
 
 var bundles = [
-    'bundled'
+    {
+        module: 'main',
+        name: 'bundled'
+    }
 ];
 
 var compilerOptions = {
@@ -75,7 +78,7 @@ gulp.task('build-system', function () {
 gulp.task('build-bundles',
 	shell.task(
 		bundles.map(function (bundle) {
-			return 'jspm bundle ' + path.output + 'main ' + path.output + bundle + '.js --inject';
+			return 'jspm bundle ' + path.output + bundle.module + ' ' + path.output + bundle.name + '.js --inject';
 		}))
 )
 
