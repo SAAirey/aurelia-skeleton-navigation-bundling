@@ -1,7 +1,7 @@
 System.register(["aurelia-http-client"], function (_export) {
   "use strict";
 
-  var HttpClient, _prototypeProperties, url, Flickr;
+  var HttpClient, _prototypeProperties, _classCallCheck, url, Flickr;
   return {
     setters: [function (_aureliaHttpClient) {
       HttpClient = _aureliaHttpClient.HttpClient;
@@ -9,9 +9,13 @@ System.register(["aurelia-http-client"], function (_export) {
     execute: function () {
       _prototypeProperties = function (child, staticProps, instanceProps) { if (staticProps) Object.defineProperties(child, staticProps); if (instanceProps) Object.defineProperties(child.prototype, instanceProps); };
 
+      _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+
       url = "http://api.flickr.com/services/feeds/photos_public.gne?tags=rainier&tagmode=any&format=json";
       Flickr = _export("Flickr", (function () {
         function Flickr(http) {
+          _classCallCheck(this, Flickr);
+
           this.heading = "Flickr";
           this.images = [];
           this.http = http;

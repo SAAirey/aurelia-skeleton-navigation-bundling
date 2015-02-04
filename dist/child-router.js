@@ -1,7 +1,7 @@
 System.register(["aurelia-router"], function (_export) {
   "use strict";
 
-  var Router, _prototypeProperties, Welcome;
+  var Router, _prototypeProperties, _classCallCheck, Welcome;
   return {
     setters: [function (_aureliaRouter) {
       Router = _aureliaRouter.Router;
@@ -9,8 +9,12 @@ System.register(["aurelia-router"], function (_export) {
     execute: function () {
       _prototypeProperties = function (child, staticProps, instanceProps) { if (staticProps) Object.defineProperties(child, staticProps); if (instanceProps) Object.defineProperties(child.prototype, instanceProps); };
 
+      _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+
       Welcome = _export("Welcome", (function () {
         function Welcome(router) {
+          _classCallCheck(this, Welcome);
+
           this.heading = "Child Router";
           this.router = router;
           router.configure(function (config) {

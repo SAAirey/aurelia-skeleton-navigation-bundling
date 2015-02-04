@@ -637,7 +637,7 @@ System.register("github:aurelia/logging@0.2.2/system/index", [], function(_expor
 
 
 
-System.register("github:aurelia/dependency-injection@0.4.1/system/metadata", [], function(_export) {
+System.register("github:aurelia/dependency-injection@0.4.2/system/metadata", [], function(_export) {
   "use strict";
   var _inherits,
       _prototypeProperties,
@@ -671,20 +671,18 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/metadata", [],
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      Registration = (function() {
+      Registration = _export("Registration", (function() {
         function Registration() {}
         _prototypeProperties(Registration, null, {register: {
             value: function register(container, key, fn) {
               throw new Error("A custom Registration must implement register(container, key, fn).");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return Registration;
-      })();
-      _export("Registration", Registration);
-      Transient = (function(Registration) {
+      })());
+      Transient = _export("Transient", (function(Registration) {
         function Transient(key) {
           this.key = key;
         }
@@ -694,13 +692,11 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/metadata", [],
               container.registerTransient(this.key || key, fn);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return Transient;
-      })(Registration);
-      _export("Transient", Transient);
-      Singleton = (function(Registration) {
+      })(Registration));
+      Singleton = _export("Singleton", (function(Registration) {
         function Singleton(key) {
           this.key = key;
         }
@@ -710,26 +706,22 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/metadata", [],
               container.registerSingleton(this.key || key, fn);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return Singleton;
-      })(Registration);
-      _export("Singleton", Singleton);
-      Resolver = (function() {
+      })(Registration));
+      Resolver = _export("Resolver", (function() {
         function Resolver() {}
         _prototypeProperties(Resolver, null, {get: {
             value: function get(container) {
               throw new Error("A custom Resolver must implement get(container) and return the resolved instance(s).");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return Resolver;
-      })();
-      _export("Resolver", Resolver);
-      Lazy = (function(Resolver) {
+      })());
+      Lazy = _export("Lazy", (function(Resolver) {
         function Lazy(key) {
           this.key = key;
         }
@@ -739,7 +731,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/metadata", [],
               return new Lazy(key);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {get: {
             value: function get(container) {
@@ -749,13 +740,11 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/metadata", [],
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return Lazy;
-      })(Resolver);
-      _export("Lazy", Lazy);
-      All = (function(Resolver) {
+      })(Resolver));
+      All = _export("All", (function(Resolver) {
         function All(key) {
           this.key = key;
         }
@@ -765,20 +754,17 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/metadata", [],
               return new All(key);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {get: {
             value: function get(container) {
               return container.getAll(this.key);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return All;
-      })(Resolver);
-      _export("All", All);
-      Optional = (function(Resolver) {
+      })(Resolver));
+      Optional = _export("Optional", (function(Resolver) {
         function Optional(key) {
           var checkParent = arguments[1] === undefined ? false : arguments[1];
           this.key = key;
@@ -791,7 +777,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/metadata", [],
               return new Optional(key, checkParent);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {get: {
             value: function get(container) {
@@ -801,13 +786,11 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/metadata", [],
               return null;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return Optional;
-      })(Resolver);
-      _export("Optional", Optional);
-      Parent = (function(Resolver) {
+      })(Resolver));
+      Parent = _export("Parent", (function(Resolver) {
         function Parent(key) {
           this.key = key;
         }
@@ -817,28 +800,26 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/metadata", [],
               return new Parent(key);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {get: {
             value: function get(container) {
               return container.parent ? container.parent.get(this.key) : null;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return Parent;
-      })(Resolver);
-      _export("Parent", Parent);
+      })(Resolver));
     }
   };
 });
 
 
 
-System.register("github:aurelia/dependency-injection@0.4.1/system/util", [], function(_export) {
+System.register("github:aurelia/dependency-injection@0.4.2/system/util", [], function(_export) {
   "use strict";
   _export("isClass", isClass);
+  function test() {}
   function isUpperCase(char) {
     return char.toUpperCase() === char;
   }
@@ -851,7 +832,7 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/util", [], fun
   return {
     setters: [],
     execute: function() {
-      if (!(function f() {}).name) {
+      if (!test.name) {
         Object.defineProperty(Function.prototype, "name", {get: function() {
             var name = this.toString().match(/^\s*function\s*(\S*)\s*\(/)[1];
             Object.defineProperty(this, "name", {value: name});
@@ -864,7 +845,7 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/util", [], fun
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/util", [], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/util", [], function(_export) {
   "use strict";
   var capitalMatcher;
   _export("hyphenate", hyphenate);
@@ -884,7 +865,7 @@ System.register("github:aurelia/templating@0.8.7/system/util", [], function(_exp
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/value-converter", ["aurelia-metadata"], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/value-converter", ["aurelia-metadata"], function(_export) {
   "use strict";
   var ResourceType,
       _prototypeProperties,
@@ -922,7 +903,7 @@ System.register("github:aurelia/binding@0.3.2/system/value-converter", ["aurelia
           subClass.__proto__ = superClass;
       };
       capitalMatcher = /([A-Z])/g;
-      ValueConverter = (function(ResourceType) {
+      ValueConverter = _export("ValueConverter", (function(ResourceType) {
         function ValueConverter(name) {
           this.name = name;
         }
@@ -934,7 +915,6 @@ System.register("github:aurelia/binding@0.3.2/system/value-converter", ["aurelia
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {
           load: {
@@ -943,7 +923,6 @@ System.register("github:aurelia/binding@0.3.2/system/value-converter", ["aurelia
               return Promise.resolve(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           register: {
@@ -951,20 +930,18 @@ System.register("github:aurelia/binding@0.3.2/system/value-converter", ["aurelia
               registry.registerValueConverter(name || this.name, this.instance);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ValueConverter;
-      })(ResourceType);
-      _export("ValueConverter", ValueConverter);
+      })(ResourceType));
     }
   };
 });
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/event-manager", [], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/event-manager", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       DefaultEventStrategy,
@@ -992,13 +969,11 @@ System.register("github:aurelia/binding@0.3.2/system/event-manager", [], functio
               document.addEventListener(eventName, this.handleDelegatedEvent.bind(this), false);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           handleCallbackResult: {
             value: function handleCallbackResult(result) {},
             writable: true,
-            enumerable: true,
             configurable: true
           },
           handleDelegatedEvent: {
@@ -1019,7 +994,6 @@ System.register("github:aurelia/binding@0.3.2/system/event-manager", [], functio
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           createDirectEventCallback: {
@@ -1030,7 +1004,6 @@ System.register("github:aurelia/binding@0.3.2/system/event-manager", [], functio
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           subscribeToDelegatedEvent: {
@@ -1043,7 +1016,6 @@ System.register("github:aurelia/binding@0.3.2/system/event-manager", [], functio
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           subscribeToDirectEvent: {
@@ -1055,7 +1027,6 @@ System.register("github:aurelia/binding@0.3.2/system/event-manager", [], functio
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           subscribe: {
@@ -1067,13 +1038,12 @@ System.register("github:aurelia/binding@0.3.2/system/event-manager", [], functio
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return DefaultEventStrategy;
       })();
-      EventManager = (function() {
+      EventManager = _export("EventManager", (function() {
         function EventManager() {
           this.elementHandlerLookup = {};
           this.eventStrategyLookup = {};
@@ -1114,7 +1084,6 @@ System.register("github:aurelia/binding@0.3.2/system/event-manager", [], functio
                 }};
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           registerElementHandler: {
@@ -1122,7 +1091,6 @@ System.register("github:aurelia/binding@0.3.2/system/event-manager", [], functio
               this.elementHandlerLookup[tagName.toLowerCase()] = handler;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           registerEventStrategy: {
@@ -1130,7 +1098,6 @@ System.register("github:aurelia/binding@0.3.2/system/event-manager", [], functio
               this.eventStrategyLookup[eventName] = strategy;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getElementHandler: {
@@ -1144,7 +1111,6 @@ System.register("github:aurelia/binding@0.3.2/system/event-manager", [], functio
               return null;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           addEventListener: {
@@ -1152,20 +1118,18 @@ System.register("github:aurelia/binding@0.3.2/system/event-manager", [], functio
               return (this.eventStrategyLookup[targetEvent] || this.defaultEventStrategy).subscribe(target, targetEvent, callback, delegate);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return EventManager;
-      })();
-      _export("EventManager", EventManager);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/task-queue@0.2.2/system/index", [], function(_export) {
+System.register("github:aurelia/task-queue@0.2.3/system/index", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       BrowserMutationObserver,
@@ -1183,13 +1147,13 @@ System.register("github:aurelia/task-queue@0.2.2/system/index", [], function(_ex
   }
   function makeRequestFlushFromTimer(flush) {
     return function requestFlush() {
-      var handleFlushTimer = function() {
+      var timeoutHandle = setTimeout(handleFlushTimer, 0);
+      var intervalHandle = setInterval(handleFlushTimer, 50);
+      function handleFlushTimer() {
         clearTimeout(timeoutHandle);
         clearInterval(intervalHandle);
         flush();
-      };
-      var timeoutHandle = setTimeout(handleFlushTimer, 0);
-      var intervalHandle = setInterval(handleFlushTimer, 50);
+      }
     };
   }
   return {
@@ -1203,7 +1167,7 @@ System.register("github:aurelia/task-queue@0.2.2/system/index", [], function(_ex
       };
       BrowserMutationObserver = window.MutationObserver || window.WebKitMutationObserver;
       hasSetImmediate = typeof setImmediate === "function";
-      TaskQueue = (function() {
+      TaskQueue = _export("TaskQueue", (function() {
         function TaskQueue() {
           var _this = this;
           this.microTaskQueue = [];
@@ -1225,24 +1189,22 @@ System.register("github:aurelia/task-queue@0.2.2/system/index", [], function(_ex
         _prototypeProperties(TaskQueue, null, {
           queueMicroTask: {
             value: function queueMicroTask(task) {
-              if (!this.microTaskQueue.length) {
+              if (this.microTaskQueue.length < 1) {
                 this.requestFlushMicroTaskQueue();
               }
               this.microTaskQueue.push(task);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           queueTask: {
             value: function queueTask(task) {
-              if (!this.taskQueue.length) {
+              if (this.taskQueue.length < 1) {
                 this.requestFlushTaskQueue();
               }
               this.taskQueue.push(task);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           flushTaskQueue: {
@@ -1262,7 +1224,6 @@ System.register("github:aurelia/task-queue@0.2.2/system/index", [], function(_ex
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           flushMicroTaskQueue: {
@@ -1290,7 +1251,6 @@ System.register("github:aurelia/task-queue@0.2.2/system/index", [], function(_ex
               queue.length = 0;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           onError: {
@@ -1308,20 +1268,18 @@ System.register("github:aurelia/task-queue@0.2.2/system/index", [], function(_ex
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return TaskQueue;
-      })();
-      _export("TaskQueue", TaskQueue);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/array-change-records", [], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/array-change-records", [], function(_export) {
   "use strict";
   var EDIT_LEAVE,
       EDIT_UPDATE,
@@ -1621,7 +1579,7 @@ System.register("github:aurelia/binding@0.3.2/system/array-change-records", [], 
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/dirty-checking", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       DirtyChecker,
@@ -1635,7 +1593,7 @@ System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], functi
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      DirtyChecker = (function() {
+      DirtyChecker = _export("DirtyChecker", (function() {
         function DirtyChecker() {
           this.tracked = [];
           this.checkDelay = 120;
@@ -1650,7 +1608,6 @@ System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], functi
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           removeProperty: {
@@ -1659,7 +1616,6 @@ System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], functi
               tracked.splice(tracked.indexOf(property), 1);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           scheduleDirtyCheck: {
@@ -1670,7 +1626,6 @@ System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], functi
               }, this.checkDelay);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           check: {
@@ -1688,14 +1643,12 @@ System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], functi
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return DirtyChecker;
-      })();
-      _export("DirtyChecker", DirtyChecker);
-      DirtyCheckProperty = (function() {
+      })());
+      DirtyCheckProperty = _export("DirtyCheckProperty", (function() {
         function DirtyCheckProperty(dirtyChecker, obj, propertyName) {
           this.dirtyChecker = dirtyChecker;
           this.obj = obj;
@@ -1709,7 +1662,6 @@ System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], functi
               return this.obj[this.propertyName];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           setValue: {
@@ -1721,7 +1673,6 @@ System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], functi
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           call: {
@@ -1736,7 +1687,6 @@ System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], functi
               this.oldValue = newValue;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           isDirty: {
@@ -1744,7 +1694,6 @@ System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], functi
               return this.oldValue !== this.getValue();
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           beginTracking: {
@@ -1754,7 +1703,6 @@ System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], functi
               this.dirtyChecker.addProperty(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           endTracking: {
@@ -1763,7 +1711,6 @@ System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], functi
               this.dirtyChecker.removeProperty(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           subscribe: {
@@ -1782,20 +1729,18 @@ System.register("github:aurelia/binding@0.3.2/system/dirty-checking", [], functi
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return DirtyCheckProperty;
-      })();
-      _export("DirtyCheckProperty", DirtyCheckProperty);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/property-observation", [], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/property-observation", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       SetterObserver,
@@ -1811,7 +1756,7 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      SetterObserver = (function() {
+      SetterObserver = _export("SetterObserver", (function() {
         function SetterObserver(taskQueue, obj, propertyName) {
           this.taskQueue = taskQueue;
           this.obj = obj;
@@ -1827,7 +1772,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               return this.obj[this.propertyName];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           setValue: {
@@ -1839,7 +1783,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getterValue: {
@@ -1847,7 +1790,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               return this.currentValue;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           setterValue: {
@@ -1863,7 +1805,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           call: {
@@ -1878,7 +1819,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           subscribe: {
@@ -1893,7 +1833,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           convertProperty: {
@@ -1910,14 +1849,12 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return SetterObserver;
-      })();
-      _export("SetterObserver", SetterObserver);
-      OoObjectObserver = (function() {
+      })());
+      OoObjectObserver = _export("OoObjectObserver", (function() {
         function OoObjectObserver(obj) {
           this.obj = obj;
           this.observers = {};
@@ -1939,7 +1876,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getObserver: {
@@ -1948,7 +1884,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               return propertyObserver;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           handleChanges: {
@@ -1969,14 +1904,12 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return OoObjectObserver;
-      })();
-      _export("OoObjectObserver", OoObjectObserver);
-      OoPropertyObserver = (function() {
+      })());
+      OoPropertyObserver = _export("OoPropertyObserver", (function() {
         function OoPropertyObserver(owner, obj, propertyName) {
           this.owner = owner;
           this.obj = obj;
@@ -1990,7 +1923,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               return this.obj[this.propertyName];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           setValue: {
@@ -2002,7 +1934,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           trigger: {
@@ -2014,7 +1945,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           subscribe: {
@@ -2022,14 +1952,12 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               return this.owner.subscribe(this, callback);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return OoPropertyObserver;
-      })();
-      _export("OoPropertyObserver", OoPropertyObserver);
-      ElementObserver = (function() {
+      })());
+      ElementObserver = _export("ElementObserver", (function() {
         function ElementObserver(handler, element, propertyName) {
           this.element = element;
           this.propertyName = propertyName;
@@ -2043,7 +1971,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               return this.element[this.propertyName];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           setValue: {
@@ -2052,7 +1979,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               this.call();
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           call: {
@@ -2067,7 +1993,6 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               this.oldValue = newValue;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           subscribe: {
@@ -2087,20 +2012,18 @@ System.register("github:aurelia/binding@0.3.2/system/property-observation", [], 
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ElementObserver;
-      })();
-      _export("ElementObserver", ElementObserver);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/binding-modes", [], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/binding-modes", [], function(_export) {
   "use strict";
   var ONE_WAY,
       TWO_WAY,
@@ -2117,7 +2040,7 @@ System.register("github:aurelia/binding@0.3.2/system/binding-modes", [], functio
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/lexer", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       Token,
@@ -2222,7 +2145,7 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      Token = (function() {
+      Token = _export("Token", (function() {
         function Token(index, text) {
           this.index = index;
           this.text = text;
@@ -2234,7 +2157,6 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           withGetterSetter: {
@@ -2243,7 +2165,6 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           withValue: {
@@ -2252,7 +2173,6 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           toString: {
@@ -2260,14 +2180,12 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               return "Token(" + this.text + ")";
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Token;
-      })();
-      _export("Token", Token);
-      Lexer = (function() {
+      })());
+      Lexer = _export("Lexer", (function() {
         function Lexer() {}
         _prototypeProperties(Lexer, null, {lex: {
             value: function lex(text) {
@@ -2281,13 +2199,11 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               return tokens;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return Lexer;
-      })();
-      _export("Lexer", Lexer);
-      Scanner = (function() {
+      })());
+      Scanner = _export("Scanner", (function() {
         function Scanner(input) {
           this.input = input;
           this.length = input.length;
@@ -2358,7 +2274,6 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               return null;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           scanCharacter: {
@@ -2368,7 +2283,6 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               return new Token(start, text);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           scanOperator: {
@@ -2379,7 +2293,6 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               return new Token(start, text).withOp(text);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           scanComplexOperator: {
@@ -2399,7 +2312,6 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               return new Token(start, text).withOp(text);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           scanIdentifier: {
@@ -2420,7 +2332,6 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               return result;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           scanNumber: {
@@ -2450,7 +2361,6 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               return new Token(start, text).withValue(value);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           scanString: {
@@ -2501,7 +2411,6 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               return new Token(start, text).withValue(unescaped);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           advance: {
@@ -2513,7 +2422,6 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           error: {
@@ -2523,13 +2431,11 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
               throw new Error("Lexer Error: " + message + " at column " + position + " in expression [" + this.input + "]");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Scanner;
-      })();
-      _export("Scanner", Scanner);
+      })());
       OPERATORS = ["undefined", "null", "true", "false", "+", "-", "*", "/", "%", "^", "=", "==", "===", "!=", "!==", "<", ">", "<=", ">=", "&&", "||", "&", "|", "!", "?"];
       $EOF = 0;
       $TAB = 9;
@@ -2587,7 +2493,7 @@ System.register("github:aurelia/binding@0.3.2/system/lexer", [], function(_expor
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/path-observer", [], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/path-observer", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       PathObserver;
@@ -2600,7 +2506,7 @@ System.register("github:aurelia/binding@0.3.2/system/path-observer", [], functio
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      PathObserver = (function() {
+      PathObserver = _export("PathObserver", (function() {
         function PathObserver(leftObserver, getRightObserver, value) {
           var _this = this;
           this.leftObserver = leftObserver;
@@ -2613,7 +2519,7 @@ System.register("github:aurelia/binding@0.3.2/system/path-observer", [], functio
         _prototypeProperties(PathObserver, null, {
           updateRight: {
             value: function updateRight(observer) {
-              var _this2 = this;
+              var _this = this;
               this.rightObserver = observer;
               if (this.disposeRight) {
                 this.disposeRight();
@@ -2622,12 +2528,11 @@ System.register("github:aurelia/binding@0.3.2/system/path-observer", [], functio
                 return null;
               }
               this.disposeRight = observer.subscribe(function(newValue) {
-                return _this2.notify(newValue);
+                return _this.notify(newValue);
               });
               return observer.getValue();
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           subscribe: {
@@ -2639,7 +2544,6 @@ System.register("github:aurelia/binding@0.3.2/system/path-observer", [], functio
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           notify: {
@@ -2650,7 +2554,6 @@ System.register("github:aurelia/binding@0.3.2/system/path-observer", [], functio
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           dispose: {
@@ -2663,20 +2566,18 @@ System.register("github:aurelia/binding@0.3.2/system/path-observer", [], functio
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return PathObserver;
-      })();
-      _export("PathObserver", PathObserver);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/composite-observer", [], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/composite-observer", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       CompositeObserver;
@@ -2689,7 +2590,7 @@ System.register("github:aurelia/binding@0.3.2/system/composite-observer", [], fu
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      CompositeObserver = (function() {
+      CompositeObserver = _export("CompositeObserver", (function() {
         function CompositeObserver(observers, evaluate) {
           var _this = this;
           this.subscriptions = new Array(observers.length);
@@ -2711,7 +2612,6 @@ System.register("github:aurelia/binding@0.3.2/system/composite-observer", [], fu
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           notify: {
@@ -2722,7 +2622,6 @@ System.register("github:aurelia/binding@0.3.2/system/composite-observer", [], fu
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           dispose: {
@@ -2733,20 +2632,18 @@ System.register("github:aurelia/binding@0.3.2/system/composite-observer", [], fu
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return CompositeObserver;
-      })();
-      _export("CompositeObserver", CompositeObserver);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/binding-expression", ["./binding-modes"], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/binding-expression", ["./binding-modes"], function(_export) {
   "use strict";
   var ONE_WAY,
       TWO_WAY,
@@ -2765,7 +2662,7 @@ System.register("github:aurelia/binding@0.3.2/system/binding-expression", ["./bi
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      BindingExpression = (function() {
+      BindingExpression = _export("BindingExpression", (function() {
         function BindingExpression(observerLocator, targetProperty, sourceExpression, mode, valueConverterLookupFunction, attribute) {
           this.observerLocator = observerLocator;
           this.targetProperty = targetProperty;
@@ -2780,12 +2677,10 @@ System.register("github:aurelia/binding@0.3.2/system/binding-expression", ["./bi
               return new Binding(this.observerLocator, this.sourceExpression, target, this.targetProperty, this.mode, this.valueConverterLookupFunction);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return BindingExpression;
-      })();
-      _export("BindingExpression", BindingExpression);
+      })());
       Binding = (function() {
         function Binding(observerLocator, sourceExpression, target, targetProperty, mode, valueConverterLookupFunction) {
           this.observerLocator = observerLocator;
@@ -2800,7 +2695,6 @@ System.register("github:aurelia/binding@0.3.2/system/binding-expression", ["./bi
               return this.observerLocator.getObserver(obj, propertyName);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           bind: {
@@ -2841,7 +2735,6 @@ System.register("github:aurelia/binding@0.3.2/system/binding-expression", ["./bi
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           unbind: {
@@ -2856,7 +2749,6 @@ System.register("github:aurelia/binding@0.3.2/system/binding-expression", ["./bi
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
@@ -2868,7 +2760,7 @@ System.register("github:aurelia/binding@0.3.2/system/binding-expression", ["./bi
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/listener-expression", [], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/listener-expression", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       ListenerExpression,
@@ -2882,7 +2774,7 @@ System.register("github:aurelia/binding@0.3.2/system/listener-expression", [], f
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      ListenerExpression = (function() {
+      ListenerExpression = _export("ListenerExpression", (function() {
         function ListenerExpression(eventManager, targetEvent, sourceExpression, delegate, preventDefault) {
           this.eventManager = eventManager;
           this.targetEvent = targetEvent;
@@ -2896,12 +2788,10 @@ System.register("github:aurelia/binding@0.3.2/system/listener-expression", [], f
               return new Listener(this.eventManager, this.targetEvent, this.delegate, this.sourceExpression, target, this.preventDefault);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return ListenerExpression;
-      })();
-      _export("ListenerExpression", ListenerExpression);
+      })());
       Listener = (function() {
         function Listener(eventManager, targetEvent, delegate, sourceExpression, target, preventDefault) {
           this.eventManager = eventManager;
@@ -2934,7 +2824,6 @@ System.register("github:aurelia/binding@0.3.2/system/listener-expression", [], f
               }, this.delegate);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           unbind: {
@@ -2945,7 +2834,6 @@ System.register("github:aurelia/binding@0.3.2/system/listener-expression", [], f
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
@@ -2957,7 +2845,7 @@ System.register("github:aurelia/binding@0.3.2/system/listener-expression", [], f
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/name-expression", [], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/name-expression", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       NameExpression,
@@ -2971,7 +2859,7 @@ System.register("github:aurelia/binding@0.3.2/system/name-expression", [], funct
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      NameExpression = (function() {
+      NameExpression = _export("NameExpression", (function() {
         function NameExpression(name, mode) {
           this.property = name;
           this.discrete = true;
@@ -2982,12 +2870,10 @@ System.register("github:aurelia/binding@0.3.2/system/name-expression", [], funct
               return new NameBinder(this.property, target, this.mode);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return NameExpression;
-      })();
-      _export("NameExpression", NameExpression);
+      })());
       NameBinder = (function() {
         function NameBinder(property, target, mode) {
           this.property = property;
@@ -3015,7 +2901,6 @@ System.register("github:aurelia/binding@0.3.2/system/name-expression", [], funct
               source[this.property] = this.target;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           unbind: {
@@ -3023,7 +2908,6 @@ System.register("github:aurelia/binding@0.3.2/system/name-expression", [], funct
               this.source[this.property] = null;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
@@ -3035,7 +2919,7 @@ System.register("github:aurelia/binding@0.3.2/system/name-expression", [], funct
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/call-expression", [], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/call-expression", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       CallExpression,
@@ -3049,7 +2933,7 @@ System.register("github:aurelia/binding@0.3.2/system/call-expression", [], funct
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      CallExpression = (function() {
+      CallExpression = _export("CallExpression", (function() {
         function CallExpression(observerLocator, targetProperty, sourceExpression, valueConverterLookupFunction) {
           this.observerLocator = observerLocator;
           this.targetProperty = targetProperty;
@@ -3061,12 +2945,10 @@ System.register("github:aurelia/binding@0.3.2/system/call-expression", [], funct
               return new Call(this.observerLocator, this.sourceExpression, target, this.targetProperty, this.valueConverterLookupFunction);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return CallExpression;
-      })();
-      _export("CallExpression", CallExpression);
+      })());
       Call = (function() {
         function Call(observerLocator, sourceExpression, target, targetProperty, valueConverterLookupFunction) {
           this.sourceExpression = sourceExpression;
@@ -3095,7 +2977,6 @@ System.register("github:aurelia/binding@0.3.2/system/call-expression", [], funct
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           unbind: {
@@ -3103,7 +2984,6 @@ System.register("github:aurelia/binding@0.3.2/system/call-expression", [], funct
               this.targetProperty.setValue(null);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
@@ -3115,7 +2995,7 @@ System.register("github:aurelia/binding@0.3.2/system/call-expression", [], funct
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/behavior-instance", [], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/behavior-instance", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       BehaviorInstance;
@@ -3128,7 +3008,7 @@ System.register("github:aurelia/templating@0.8.7/system/behavior-instance", [], 
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      BehaviorInstance = (function() {
+      BehaviorInstance = _export("BehaviorInstance", (function() {
         function BehaviorInstance(behavior, executionContext, instruction) {
           this.behavior = behavior;
           this.executionContext = executionContext;
@@ -3151,7 +3031,6 @@ System.register("github:aurelia/templating@0.8.7/system/behavior-instance", [], 
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           bind: {
@@ -3184,7 +3063,6 @@ System.register("github:aurelia/templating@0.8.7/system/behavior-instance", [], 
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           unbind: {
@@ -3203,7 +3081,6 @@ System.register("github:aurelia/templating@0.8.7/system/behavior-instance", [], 
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           attached: {
@@ -3213,7 +3090,6 @@ System.register("github:aurelia/templating@0.8.7/system/behavior-instance", [], 
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           detached: {
@@ -3223,20 +3099,18 @@ System.register("github:aurelia/templating@0.8.7/system/behavior-instance", [], 
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return BehaviorInstance;
-      })();
-      _export("BehaviorInstance", BehaviorInstance);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/children", [], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/children", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       noMutations,
@@ -3252,7 +3126,7 @@ System.register("github:aurelia/templating@0.8.7/system/children", [], function(
           Object.defineProperties(child.prototype, instanceProps);
       };
       noMutations = [];
-      ChildObserver = (function() {
+      ChildObserver = _export("ChildObserver", (function() {
         function ChildObserver(property, changeHandler, selector) {
           this.selector = selector;
           this.changeHandler = changeHandler;
@@ -3263,13 +3137,11 @@ System.register("github:aurelia/templating@0.8.7/system/children", [], function(
               return new ChildObserverBinder(this.selector, target, this.property, behavior, this.changeHandler);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return ChildObserver;
-      })();
-      _export("ChildObserver", ChildObserver);
-      ChildObserverBinder = (function() {
+      })());
+      ChildObserverBinder = _export("ChildObserverBinder", (function() {
         function ChildObserverBinder(selector, target, property, behavior, changeHandler) {
           this.selector = selector;
           this.target = target;
@@ -3308,7 +3180,6 @@ System.register("github:aurelia/templating@0.8.7/system/children", [], function(
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           unbind: {
@@ -3316,7 +3187,6 @@ System.register("github:aurelia/templating@0.8.7/system/children", [], function(
               this.observer.disconnect();
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           onChange: {
@@ -3362,20 +3232,18 @@ System.register("github:aurelia/templating@0.8.7/system/children", [], function(
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ChildObserverBinder;
-      })();
-      _export("ChildObserverBinder", ChildObserverBinder);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/content-selector", [], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/content-selector", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       proto,
@@ -3403,7 +3271,7 @@ System.register("github:aurelia/templating@0.8.7/system/content-selector", [], f
         proto.matches = proto.matchesSelector || proto.mozMatchesSelector || proto.msMatchesSelector || proto.oMatchesSelector || proto.webkitMatchesSelector;
       }
       placeholder = [];
-      ContentSelector = (function() {
+      ContentSelector = _export("ContentSelector", (function() {
         function ContentSelector(anchor, selector) {
           this.anchor = anchor;
           this.selector = selector;
@@ -3447,7 +3315,6 @@ System.register("github:aurelia/templating@0.8.7/system/content-selector", [], f
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {
           copyForViewSlot: {
@@ -3455,7 +3322,6 @@ System.register("github:aurelia/templating@0.8.7/system/content-selector", [], f
               return new ContentSelector(this.anchor, this.selector);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           matches: {
@@ -3463,7 +3329,6 @@ System.register("github:aurelia/templating@0.8.7/system/content-selector", [], f
               return this.all || node.nodeType === 1 && node.matches(this.selector);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           add: {
@@ -3478,7 +3343,6 @@ System.register("github:aurelia/templating@0.8.7/system/content-selector", [], f
               this.groups.push(group);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           insert: {
@@ -3495,7 +3359,6 @@ System.register("github:aurelia/templating@0.8.7/system/content-selector", [], f
               this.groups.splice(index, 0, group);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           removeAt: {
@@ -3509,20 +3372,18 @@ System.register("github:aurelia/templating@0.8.7/system/content-selector", [], f
               this.groups.splice(index, 1);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ContentSelector;
-      })();
-      _export("ContentSelector", ContentSelector);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["aurelia-path"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/resource-registry", ["aurelia-path"], function(_export) {
   "use strict";
   var relativeToFile,
       _get,
@@ -3586,7 +3447,7 @@ System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["au
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      ResourceRegistry = (function() {
+      ResourceRegistry = _export("ResourceRegistry", (function() {
         function ResourceRegistry() {
           this.attributes = {};
           this.elements = {};
@@ -3600,7 +3461,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["au
               register(this.elements, tagName, behavior, "an Element");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getElement: {
@@ -3608,7 +3468,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["au
               return this.elements[tagName];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           registerAttribute: {
@@ -3617,7 +3476,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["au
               register(this.attributes, attribute, behavior, "an Attribute");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getAttribute: {
@@ -3625,7 +3483,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["au
               return this.attributes[attribute];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           registerValueConverter: {
@@ -3633,7 +3490,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["au
               register(this.valueConverters, name, valueConverter, "a ValueConverter");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getValueConverter: {
@@ -3641,14 +3497,12 @@ System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["au
               return this.valueConverters[name];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ResourceRegistry;
-      })();
-      _export("ResourceRegistry", ResourceRegistry);
-      ViewResources = (function(ResourceRegistry) {
+      })());
+      ViewResources = _export("ViewResources", (function(ResourceRegistry) {
         function ViewResources(parent, viewUrl) {
           _get(Object.getPrototypeOf(ViewResources.prototype), "constructor", this).call(this);
           this.parent = parent;
@@ -3662,7 +3516,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["au
               return relativeToFile(path, this.viewUrl);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getElement: {
@@ -3670,7 +3523,13 @@ System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["au
               return this.elements[tagName] || this.parent.getElement(tagName);
             },
             writable: true,
-            enumerable: true,
+            configurable: true
+          },
+          mapAttribute: {
+            value: function mapAttribute(attribute) {
+              return this.attributeMap[attribute] || this.parent.attributeMap[attribute];
+            },
+            writable: true,
             configurable: true
           },
           getAttribute: {
@@ -3678,7 +3537,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["au
               return this.attributes[attribute] || this.parent.getAttribute(attribute);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getValueConverter: {
@@ -3686,20 +3544,18 @@ System.register("github:aurelia/templating@0.8.7/system/resource-registry", ["au
               return this.valueConverters[name] || this.parent.getValueConverter(name);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ViewResources;
-      })(ResourceRegistry);
-      _export("ViewResources", ViewResources);
+      })(ResourceRegistry));
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/view", [], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/view", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       View;
@@ -3712,7 +3568,7 @@ System.register("github:aurelia/templating@0.8.7/system/view", [], function(_exp
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      View = (function() {
+      View = _export("View", (function() {
         function View(fragment, behaviors, bindings, children, systemControlled, contentSelectors) {
           this.fragment = fragment;
           this.behaviors = behaviors;
@@ -3736,7 +3592,6 @@ System.register("github:aurelia/templating@0.8.7/system/view", [], function(_exp
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           bind: {
@@ -3777,7 +3632,6 @@ System.register("github:aurelia/templating@0.8.7/system/view", [], function(_exp
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           addBinding: {
@@ -3788,7 +3642,6 @@ System.register("github:aurelia/templating@0.8.7/system/view", [], function(_exp
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           unbind: {
@@ -3818,7 +3671,6 @@ System.register("github:aurelia/templating@0.8.7/system/view", [], function(_exp
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           insertNodesBefore: {
@@ -3827,7 +3679,6 @@ System.register("github:aurelia/templating@0.8.7/system/view", [], function(_exp
               parent.insertBefore(this.fragment, refNode);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           appendNodesTo: {
@@ -3835,7 +3686,6 @@ System.register("github:aurelia/templating@0.8.7/system/view", [], function(_exp
               parent.appendChild(this.fragment);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           removeNodes: {
@@ -3857,7 +3707,6 @@ System.register("github:aurelia/templating@0.8.7/system/view", [], function(_exp
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           attached: {
@@ -3883,7 +3732,6 @@ System.register("github:aurelia/templating@0.8.7/system/view", [], function(_exp
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           detached: {
@@ -3908,20 +3756,18 @@ System.register("github:aurelia/templating@0.8.7/system/view", [], function(_exp
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return View;
-      })();
-      _export("View", View);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-selector"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/view-slot", ["./content-selector"], function(_export) {
   "use strict";
   var ContentSelector,
       _prototypeProperties,
@@ -3937,7 +3783,7 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      ViewSlot = (function() {
+      ViewSlot = _export("ViewSlot", (function() {
         function ViewSlot(anchor, anchorIsContainer, executionContext) {
           this.anchor = anchor;
           this.viewAddMethod = anchorIsContainer ? "appendNodesTo" : "insertNodesBefore";
@@ -3966,7 +3812,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           bind: {
@@ -3988,7 +3833,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           unbind: {
@@ -4002,7 +3846,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           add: {
@@ -4014,7 +3857,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           insert: {
@@ -4030,7 +3872,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           remove: {
@@ -4042,7 +3883,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           removeAt: {
@@ -4056,7 +3896,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               return view;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           removeAll: {
@@ -4075,7 +3914,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               this.children = [];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           swap: {
@@ -4084,7 +3922,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               this.add(view);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           attached: {
@@ -4102,7 +3939,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           detached: {
@@ -4119,7 +3955,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           installContentSelectors: {
@@ -4132,7 +3967,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               this.removeAll = this.contentSelectorRemoveAll;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           contentSelectorAdd: {
@@ -4146,7 +3980,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           contentSelectorInsert: {
@@ -4164,7 +3997,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           contentSelectorRemove: {
@@ -4182,7 +4014,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           contentSelectorRemoveAt: {
@@ -4201,7 +4032,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               return view;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           contentSelectorRemoveAll: {
@@ -4227,20 +4057,18 @@ System.register("github:aurelia/templating@0.8.7/system/view-slot", ["./content-
               this.children = [];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ViewSlot;
-      })();
-      _export("ViewSlot", ViewSlot);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/binding-language", [], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/binding-language", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       BindingLanguage;
@@ -4253,7 +4081,7 @@ System.register("github:aurelia/templating@0.8.7/system/binding-language", [], f
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      BindingLanguage = (function() {
+      BindingLanguage = _export("BindingLanguage", (function() {
         function BindingLanguage() {}
         _prototypeProperties(BindingLanguage, null, {
           inspectAttribute: {
@@ -4261,7 +4089,6 @@ System.register("github:aurelia/templating@0.8.7/system/binding-language", [], f
               throw new Error("A BindingLanguage must implement inspectAttribute(...)");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           createAttributeInstruction: {
@@ -4269,7 +4096,6 @@ System.register("github:aurelia/templating@0.8.7/system/binding-language", [], f
               throw new Error("A BindingLanguage must implement createAttributeInstruction(...)");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseText: {
@@ -4277,20 +4103,18 @@ System.register("github:aurelia/templating@0.8.7/system/binding-language", [], f
               throw new Error("A BindingLanguage must implement parseText(...)");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return BindingLanguage;
-      })();
-      _export("BindingLanguage", BindingLanguage);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/view-strategy", ["aurelia-metadata", "aurelia-path"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/view-strategy", ["aurelia-metadata", "aurelia-path"], function(_export) {
   "use strict";
   var Metadata,
       Origin,
@@ -4328,7 +4152,7 @@ System.register("github:aurelia/templating@0.8.7/system/view-strategy", ["aureli
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      ViewStrategy = (function() {
+      ViewStrategy = _export("ViewStrategy", (function() {
         function ViewStrategy() {}
         _prototypeProperties(ViewStrategy, {
           normalize: {
@@ -4342,7 +4166,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-strategy", ["aureli
               return value;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getDefault: {
@@ -4365,14 +4188,12 @@ System.register("github:aurelia/templating@0.8.7/system/view-strategy", ["aureli
               return strategy;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         }, {
           makeRelativeTo: {
             value: function makeRelativeTo(baseUrl) {},
             writable: true,
-            enumerable: true,
             configurable: true
           },
           loadViewFactory: {
@@ -4380,14 +4201,12 @@ System.register("github:aurelia/templating@0.8.7/system/view-strategy", ["aureli
               throw new Error("A ViewStrategy must implement loadViewFactory(viewEngine, options).");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ViewStrategy;
-      })();
-      _export("ViewStrategy", ViewStrategy);
-      UseView = (function(ViewStrategy) {
+      })());
+      UseView = _export("UseView", (function(ViewStrategy) {
         function UseView(path) {
           this.path = path;
         }
@@ -4401,7 +4220,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-strategy", ["aureli
               return viewEngine.loadViewFactory(this.absolutePath || this.path, options, this.moduleId);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           makeRelativeTo: {
@@ -4409,14 +4227,12 @@ System.register("github:aurelia/templating@0.8.7/system/view-strategy", ["aureli
               this.absolutePath = relativeToFile(this.path, file);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return UseView;
-      })(ViewStrategy);
-      _export("UseView", UseView);
-      ConventionalView = (function(ViewStrategy) {
+      })(ViewStrategy));
+      ConventionalView = _export("ConventionalView", (function(ViewStrategy) {
         function ConventionalView(moduleId) {
           this.moduleId = moduleId;
           this.viewUrl = ConventionalView.convertModuleIdToViewUrl(moduleId);
@@ -4427,20 +4243,17 @@ System.register("github:aurelia/templating@0.8.7/system/view-strategy", ["aureli
               return moduleId + ".html";
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {loadViewFactory: {
             value: function loadViewFactory(viewEngine, options) {
               return viewEngine.loadViewFactory(this.viewUrl, options, this.moduleId);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return ConventionalView;
-      })(ViewStrategy);
-      _export("ConventionalView", ConventionalView);
-      NoView = (function(ViewStrategy) {
+      })(ViewStrategy));
+      NoView = _export("NoView", (function(ViewStrategy) {
         function NoView() {
           if (Object.getPrototypeOf(NoView) !== null) {
             Object.getPrototypeOf(NoView).apply(this, arguments);
@@ -4452,19 +4265,17 @@ System.register("github:aurelia/templating@0.8.7/system/view-strategy", ["aureli
               return Promise.resolve(null);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return NoView;
-      })(ViewStrategy);
-      _export("NoView", NoView);
+      })(ViewStrategy));
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/element-config", ["aurelia-metadata", "aurelia-binding"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/element-config", ["aurelia-metadata", "aurelia-binding"], function(_export) {
   "use strict";
   var ResourceType,
       EventManager,
@@ -4497,7 +4308,7 @@ System.register("github:aurelia/templating@0.8.7/system/element-config", ["aurel
         if (superClass)
           subClass.__proto__ = superClass;
       };
-      ElementConfig = (function(ResourceType) {
+      ElementConfig = _export("ElementConfig", (function(ResourceType) {
         function ElementConfig() {
           if (Object.getPrototypeOf(ElementConfig) !== null) {
             Object.getPrototypeOf(ElementConfig).apply(this, arguments);
@@ -4512,26 +4323,23 @@ System.register("github:aurelia/templating@0.8.7/system/element-config", ["aurel
               eventManager.registerElementConfig(config);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           register: {
             value: function register() {},
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ElementConfig;
-      })(ResourceType);
-      _export("ElementConfig", ElementConfig);
+      })(ResourceType));
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/template-controller", ["aurelia-metadata", "./behavior-instance", "./behaviors", "./util"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/template-controller", ["aurelia-metadata", "./behavior-instance", "./behaviors", "./util"], function(_export) {
   "use strict";
   var ResourceType,
       BehaviorInstance,
@@ -4570,7 +4378,7 @@ System.register("github:aurelia/templating@0.8.7/system/template-controller", ["
         if (superClass)
           subClass.__proto__ = superClass;
       };
-      TemplateController = (function(ResourceType) {
+      TemplateController = _export("TemplateController", (function(ResourceType) {
         function TemplateController(attribute) {
           this.name = attribute;
           this.properties = [];
@@ -4585,7 +4393,6 @@ System.register("github:aurelia/templating@0.8.7/system/template-controller", ["
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {
           analyze: {
@@ -4593,7 +4400,6 @@ System.register("github:aurelia/templating@0.8.7/system/template-controller", ["
               configureBehavior(container, this, target);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           load: {
@@ -4601,7 +4407,6 @@ System.register("github:aurelia/templating@0.8.7/system/template-controller", ["
               return Promise.resolve(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           register: {
@@ -4609,7 +4414,6 @@ System.register("github:aurelia/templating@0.8.7/system/template-controller", ["
               registry.registerAttribute(name || this.name, this, this.name);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           compile: {
@@ -4633,7 +4437,6 @@ System.register("github:aurelia/templating@0.8.7/system/template-controller", ["
               return node;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           create: {
@@ -4644,20 +4447,18 @@ System.register("github:aurelia/templating@0.8.7/system/template-controller", ["
               return behaviorInstance;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return TemplateController;
-      })(ResourceType);
-      _export("TemplateController", TemplateController);
+      })(ResourceType));
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", ["aurelia-loader", "aurelia-path", "aurelia-dependency-injection", "aurelia-metadata", "aurelia-binding", "./custom-element", "./attached-behavior", "./template-controller", "./view-engine", "./resource-registry"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/resource-coordinator", ["aurelia-loader", "aurelia-path", "aurelia-dependency-injection", "aurelia-metadata", "aurelia-binding", "./custom-element", "./attached-behavior", "./template-controller", "./view-engine", "./resource-registry"], function(_export) {
   "use strict";
   var Loader,
       relativeToFile,
@@ -4782,7 +4583,7 @@ System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", [
           Object.defineProperties(child.prototype, instanceProps);
       };
       id = 0;
-      ResourceCoordinator = (function() {
+      ResourceCoordinator = _export("ResourceCoordinator", (function() {
         function ResourceCoordinator(loader, container, viewEngine, appResources) {
           this.loader = loader;
           this.container = container;
@@ -4797,7 +4598,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", [
               return [Loader, Container, ViewEngine, ResourceRegistry];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {
           getExistingModuleAnalysis: {
@@ -4805,7 +4605,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", [
               return this.importedModules[id] || this.importedAnonymous[id];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           loadViewModelInfo: {
@@ -4813,7 +4612,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", [
               return this._loadAndAnalyzeModuleForElement(moduleImport, moduleMember, this.importedAnonymous);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           loadElement: {
@@ -4829,12 +4627,11 @@ System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", [
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           _loadAndAnalyzeModuleForElement: {
-            value: function LoadAndAnalyzeModuleForElement(moduleImport, moduleMember, cache) {
-              var _this2 = this;
+            value: function _loadAndAnalyzeModuleForElement(moduleImport, moduleMember, cache) {
+              var _this = this;
               var existing = cache[moduleImport];
               if (existing) {
                 return Promise.resolve(existing.element);
@@ -4842,7 +4639,7 @@ System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", [
               return this.loader.loadModule(moduleImport).then(function(elementModule) {
                 var analysis = analyzeModule(elementModule, moduleMember),
                     resources = analysis.resources,
-                    container = _this2.container,
+                    container = _this.container,
                     loads = [],
                     type,
                     current,
@@ -4867,7 +4664,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", [
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           importResources: {
@@ -4909,18 +4705,16 @@ System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", [
               return this.importResourcesFromModules(finalModules, importIds);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           importResourcesFromModuleIds: {
             value: function importResourcesFromModuleIds(importIds) {
-              var _this3 = this;
+              var _this = this;
               return this.loader.loadAllModules(importIds).then(function(imports) {
-                return _this3.importResourcesFromModules(imports, importIds);
+                return _this.importResourcesFromModules(imports, importIds);
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           importResourcesFromModules: {
@@ -4985,13 +4779,11 @@ System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", [
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ResourceCoordinator;
-      })();
-      _export("ResourceCoordinator", ResourceCoordinator);
+      })());
       ResourceModule = (function() {
         function ResourceModule(source, element, resources) {
           var i,
@@ -5033,7 +4825,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", [
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           register: {
@@ -5051,7 +4842,6 @@ System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", [
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
@@ -5063,7 +4853,7 @@ System.register("github:aurelia/templating@0.8.7/system/resource-coordinator", [
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/composition-engine", ["aurelia-metadata", "./view-strategy", "./resource-coordinator", "./view-engine", "./custom-element"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/composition-engine", ["aurelia-metadata", "./view-strategy", "./resource-coordinator", "./view-engine", "./custom-element"], function(_export) {
   "use strict";
   var Origin,
       ViewStrategy,
@@ -5093,7 +4883,7 @@ System.register("github:aurelia/templating@0.8.7/system/composition-engine", ["a
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      CompositionEngine = (function() {
+      CompositionEngine = _export("CompositionEngine", (function() {
         function CompositionEngine(resourceCoordinator, viewEngine) {
           this.resourceCoordinator = resourceCoordinator;
           this.viewEngine = viewEngine;
@@ -5103,7 +4893,6 @@ System.register("github:aurelia/templating@0.8.7/system/composition-engine", ["a
               return [ResourceCoordinator, ViewEngine];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {
           activate: {
@@ -5114,7 +4903,6 @@ System.register("github:aurelia/templating@0.8.7/system/composition-engine", ["a
               return instruction.viewModel.activate(instruction.model) || Promise.resolve();
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           createBehaviorAndSwap: {
@@ -5129,7 +4917,6 @@ System.register("github:aurelia/templating@0.8.7/system/composition-engine", ["a
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           createBehavior: {
@@ -5169,7 +4956,6 @@ System.register("github:aurelia/templating@0.8.7/system/composition-engine", ["a
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           createViewModel: {
@@ -5184,7 +4970,6 @@ System.register("github:aurelia/templating@0.8.7/system/composition-engine", ["a
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           compose: {
@@ -5215,20 +5000,18 @@ System.register("github:aurelia/templating@0.8.7/system/composition-engine", ["a
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return CompositionEngine;
-      })();
-      _export("CompositionEngine", CompositionEngine);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/framework@0.8.5/system/plugins", ["aurelia-logging", "aurelia-metadata"], function(_export) {
+System.register("github:aurelia/framework@0.8.6/system/plugins", ["aurelia-logging", "aurelia-metadata"], function(_export) {
   "use strict";
   var LogManager,
       Metadata,
@@ -5270,7 +5053,7 @@ System.register("github:aurelia/framework@0.8.5/system/plugins", ["aurelia-loggi
           Object.defineProperties(child.prototype, instanceProps);
       };
       logger = LogManager.getLogger("aurelia");
-      Plugins = (function() {
+      Plugins = _export("Plugins", (function() {
         function Plugins(aurelia) {
           this.aurelia = aurelia;
           this.info = [];
@@ -5291,7 +5074,6 @@ System.register("github:aurelia/framework@0.8.5/system/plugins", ["aurelia-loggi
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           es5: {
@@ -5309,21 +5091,21 @@ System.register("github:aurelia/framework@0.8.5/system/plugins", ["aurelia-loggi
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           atscript: {
             value: function atscript() {
               this.aurelia.container.supportAtScript();
-              Metadata.configure.location("annotate");
+              Metadata.configure.locator(function(fn) {
+                return fn.annotate || fn.annotations;
+              });
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           _process: {
-            value: function Process() {
+            value: function _process() {
               var _this = this;
               var aurelia = this.aurelia,
                   loader = aurelia.loader,
@@ -5342,13 +5124,11 @@ System.register("github:aurelia/framework@0.8.5/system/plugins", ["aurelia-loggi
               return next();
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Plugins;
-      })();
-      _export("Plugins", Plugins);
+      })());
     }
   };
 });
@@ -5758,7 +5538,7 @@ System.register("github:aurelia/route-recognizer@0.2.2/system/dsl", [], function
 
 
 
-System.register("github:aurelia/router@0.5.3/system/navigation-plan", [], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/navigation-plan", [], function(_export) {
   "use strict";
   var _toArray,
       _prototypeProperties,
@@ -5868,7 +5648,7 @@ System.register("github:aurelia/router@0.5.3/system/navigation-plan", [], functi
 
 
 
-System.register("github:aurelia/router@0.5.3/system/navigation-instruction", [], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/navigation-instruction", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       NavigationInstruction;
@@ -5953,7 +5733,7 @@ System.register("github:aurelia/router@0.5.3/system/navigation-instruction", [],
 
 
 
-System.register("github:aurelia/router@0.5.3/system/router-configuration", [], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/router-configuration", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       RouterConfiguration;
@@ -6113,7 +5893,7 @@ System.register("github:aurelia/router@0.5.3/system/router-configuration", [], f
 
 
 
-System.register("github:aurelia/router@0.5.3/system/util", [], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/util", [], function(_export) {
   "use strict";
   _export("processPotential", processPotential);
   function processPotential(obj, resolve, reject) {
@@ -6199,7 +5979,7 @@ System.register("github:aurelia/history@0.2.2/system/index", [], function(_expor
 
 
 
-System.register("github:aurelia/router@0.5.3/system/pipeline", [], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/pipeline", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       COMPLETED,
@@ -6296,7 +6076,7 @@ System.register("github:aurelia/router@0.5.3/system/pipeline", [], function(_exp
 
 
 
-System.register("github:aurelia/router@0.5.3/system/model-binding", [], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/model-binding", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       ApplyModelBindersStep;
@@ -6326,7 +6106,7 @@ System.register("github:aurelia/router@0.5.3/system/model-binding", [], function
 
 
 
-System.register("github:aurelia/router@0.5.3/system/route-loading", ["./navigation-plan"], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/route-loading", ["./navigation-plan"], function(_export) {
   "use strict";
   var REPLACE,
       buildNavigationPlan,
@@ -6446,7 +6226,7 @@ System.register("github:aurelia/router@0.5.3/system/route-loading", ["./navigati
 
 
 
-System.register("github:aurelia/router@0.5.3/system/navigation-commands", [], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/navigation-commands", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       Redirect;
@@ -6678,7 +6458,7 @@ System.register("github:aurelia/templating-router@0.9.2/system/router-view", ["a
 
 
 
-System.register("github:aurelia/templating-resources@0.8.4/system/compose", ["aurelia-dependency-injection", "aurelia-templating"], function(_export) {
+System.register("github:aurelia/templating-resources@0.8.5/system/compose", ["aurelia-dependency-injection", "aurelia-templating"], function(_export) {
   "use strict";
   var Container,
       Behavior,
@@ -6714,7 +6494,7 @@ System.register("github:aurelia/templating-resources@0.8.4/system/compose", ["au
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      Compose = (function() {
+      Compose = _export("Compose", (function() {
         function Compose(container, compositionEngine, viewSlot, viewResources) {
           this.container = container;
           this.compositionEngine = compositionEngine;
@@ -6727,7 +6507,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/compose", ["au
               return Behavior.customElement("compose").withProperty("model").withProperty("view").withProperty("viewModel").noView();
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           inject: {
@@ -6735,7 +6514,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/compose", ["au
               return [Container, CompositionEngine, ViewSlot, ViewResources];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         }, {
@@ -6749,7 +6527,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/compose", ["au
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           modelChanged: {
@@ -6759,7 +6536,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/compose", ["au
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           viewChanged: {
@@ -6767,7 +6543,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/compose", ["au
               processInstruction(this, {view: newValue});
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           viewModelChanged: {
@@ -6775,20 +6550,18 @@ System.register("github:aurelia/templating-resources@0.8.4/system/compose", ["au
               processInstruction(this, {viewModel: newValue});
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Compose;
-      })();
-      _export("Compose", Compose);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating-resources@0.8.4/system/if", ["aurelia-templating"], function(_export) {
+System.register("github:aurelia/templating-resources@0.8.5/system/if", ["aurelia-templating"], function(_export) {
   "use strict";
   var Behavior,
       BoundViewFactory,
@@ -6808,7 +6581,7 @@ System.register("github:aurelia/templating-resources@0.8.4/system/if", ["aurelia
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      If = (function() {
+      If = _export("If", (function() {
         function If(viewFactory, viewSlot) {
           this.viewFactory = viewFactory;
           this.viewSlot = viewSlot;
@@ -6820,7 +6593,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/if", ["aurelia
               return Behavior.templateController("if").withProperty("value", "valueChanged", "if");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           inject: {
@@ -6828,7 +6600,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/if", ["aurelia
               return [BoundViewFactory, ViewSlot];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         }, {valueChanged: {
@@ -6853,19 +6624,17 @@ System.register("github:aurelia/templating-resources@0.8.4/system/if", ["aurelia
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return If;
-      })();
-      _export("If", If);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating-resources@0.8.4/system/repeat", ["aurelia-binding", "aurelia-templating"], function(_export) {
+System.register("github:aurelia/templating-resources@0.8.5/system/repeat", ["aurelia-binding", "aurelia-templating"], function(_export) {
   "use strict";
   var ObserverLocator,
       calcSplices,
@@ -6890,7 +6659,7 @@ System.register("github:aurelia/templating-resources@0.8.4/system/repeat", ["aur
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      Repeat = (function() {
+      Repeat = _export("Repeat", (function() {
         function Repeat(viewFactory, viewSlot, observerLocator) {
           this.viewFactory = viewFactory;
           this.viewSlot = viewSlot;
@@ -6903,7 +6672,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/repeat", ["aur
               return Behavior.templateController("repeat").withProperty("items", "itemsChanged", "repeat").withProperty("local");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           inject: {
@@ -6911,7 +6679,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/repeat", ["aur
               return [BoundViewFactory, ViewSlot, ObserverLocator];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         }, {
@@ -6933,7 +6700,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/repeat", ["aur
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           unbind: {
@@ -6946,7 +6712,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/repeat", ["aur
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           itemsChanged: {
@@ -6954,12 +6719,11 @@ System.register("github:aurelia/templating-resources@0.8.4/system/repeat", ["aur
               this.processItems();
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           processItems: {
             value: function processItems() {
-              var _this2 = this;
+              var _this = this;
               var items = this.items,
                   observer = this.observerLocator.getArrayObserver(items),
                   viewSlot = this.viewSlot,
@@ -6978,11 +6742,10 @@ System.register("github:aurelia/templating-resources@0.8.4/system/repeat", ["aur
                 viewSlot.add(view);
               }
               this.disposeArraySubscription = observer.subscribe(function(splices) {
-                _this2.handleSplices(items, splices);
+                _this.handleSplices(items, splices);
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           createBaseExecutionContext: {
@@ -6992,7 +6755,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/repeat", ["aur
               return context;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           createFullExecutionContext: {
@@ -7001,7 +6763,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/repeat", ["aur
               return this.updateExecutionContext(context, index, length);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           updateExecutionContext: {
@@ -7019,7 +6780,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/repeat", ["aur
               return context;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           handleSplices: {
@@ -7081,20 +6841,18 @@ System.register("github:aurelia/templating-resources@0.8.4/system/repeat", ["aur
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Repeat;
-      })();
-      _export("Repeat", Repeat);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating-resources@0.8.4/system/show", ["aurelia-templating"], function(_export) {
+System.register("github:aurelia/templating-resources@0.8.5/system/show", ["aurelia-templating"], function(_export) {
   "use strict";
   var Behavior,
       _prototypeProperties,
@@ -7116,8 +6874,8 @@ System.register("github:aurelia/templating-resources@0.8.4/system/show", ["aurel
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      addStyleString(".aurelia-hide { display:none; }");
-      Show = (function() {
+      addStyleString(".aurelia-hide { display:none !important; }");
+      Show = _export("Show", (function() {
         function Show(element) {
           this.element = element;
         }
@@ -7127,7 +6885,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/show", ["aurel
               return Behavior.attachedBehavior("show").withProperty("value", "valueChanged", "show");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           inject: {
@@ -7135,7 +6892,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/show", ["aurel
               return [Element];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         }, {valueChanged: {
@@ -7147,19 +6903,17 @@ System.register("github:aurelia/templating-resources@0.8.4/system/show", ["aurel
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return Show;
-      })();
-      _export("Show", Show);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating-resources@0.8.4/system/selected-item", ["aurelia-templating"], function(_export) {
+System.register("github:aurelia/templating-resources@0.8.5/system/selected-item", ["aurelia-templating"], function(_export) {
   "use strict";
   var Behavior,
       _prototypeProperties,
@@ -7175,7 +6929,7 @@ System.register("github:aurelia/templating-resources@0.8.4/system/selected-item"
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      SelectedItem = (function() {
+      SelectedItem = _export("SelectedItem", (function() {
         function SelectedItem(element) {
           this.element = element;
           this.options = [];
@@ -7189,7 +6943,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/selected-item"
               }).syncChildren("options", "optionsChanged", "option");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           inject: {
@@ -7197,7 +6950,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/selected-item"
               return [Element];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         }, {
@@ -7206,7 +6958,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/selected-item"
               this.element.addEventListener("change", this.callback, false);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           unbind: {
@@ -7214,7 +6965,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/selected-item"
               this.element.removeEventListener("change", this.callback);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           valueChanged: {
@@ -7222,7 +6972,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/selected-item"
               this.optionsChanged();
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           selectedIndexChanged: {
@@ -7232,7 +6981,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/selected-item"
               this.value = option ? option.model : null;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           optionsChanged: {
@@ -7254,20 +7002,18 @@ System.register("github:aurelia/templating-resources@0.8.4/system/selected-item"
               this.element.selectedIndex = 0;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return SelectedItem;
-      })();
-      _export("SelectedItem", SelectedItem);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating-resources@0.8.4/system/global-behavior", ["aurelia-templating"], function(_export) {
+System.register("github:aurelia/templating-resources@0.8.5/system/global-behavior", ["aurelia-templating"], function(_export) {
   "use strict";
   var Behavior,
       _prototypeProperties,
@@ -7283,7 +7029,7 @@ System.register("github:aurelia/templating-resources@0.8.4/system/global-behavio
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      GlobalBehavior = (function() {
+      GlobalBehavior = _export("GlobalBehavior", (function() {
         function GlobalBehavior(element) {
           this.element = element;
         }
@@ -7295,7 +7041,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/global-behavio
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           inject: {
@@ -7303,7 +7048,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/global-behavio
               return [Element];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         }, {
@@ -7320,7 +7064,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/global-behavio
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           attached: {
@@ -7330,7 +7073,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/global-behavio
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           detached: {
@@ -7340,7 +7082,6 @@ System.register("github:aurelia/templating-resources@0.8.4/system/global-behavio
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           unbind: {
@@ -7351,13 +7092,11 @@ System.register("github:aurelia/templating-resources@0.8.4/system/global-behavio
               this.handler = null;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return GlobalBehavior;
-      })();
-      _export("GlobalBehavior", GlobalBehavior);
+      })());
       GlobalBehavior.createSettingsFromBehavior = function(behavior) {
         var settings = {};
         for (var key in behavior) {
@@ -7376,7 +7115,7 @@ System.register("github:aurelia/templating-resources@0.8.4/system/global-behavio
             behavior.plugin = window.jQuery(element)[pluginName](settings);
           },
           unbind: function unbind(behavior, element) {
-            if ("destroy" in behavior.plugin) {
+            if (typeof behavior.plugin.destroy === "function") {
               behavior.plugin.destroy();
               behavior.plugin = null;
             }
@@ -7738,6 +7477,7 @@ System.register("dist/nav-bar", ["aurelia-framework"], function(_export) {
   "use strict";
   var Behavior,
       _prototypeProperties,
+      _classCallCheck,
       NavBar;
   return {
     setters: [function(_aureliaFramework) {
@@ -7750,8 +7490,15 @@ System.register("dist/nav-bar", ["aurelia-framework"], function(_export) {
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
+      _classCallCheck = function(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError("Cannot call a class as a function");
+        }
+      };
       NavBar = _export("NavBar", (function() {
-        function NavBar() {}
+        function NavBar() {
+          _classCallCheck(this, NavBar);
+        }
         _prototypeProperties(NavBar, {metadata: {
             value: function metadata() {
               return Behavior.withProperty("router");
@@ -7771,6 +7518,7 @@ System.register("dist/app", ["aurelia-router"], function(_export) {
   "use strict";
   var Router,
       _prototypeProperties,
+      _classCallCheck,
       App;
   return {
     setters: [function(_aureliaRouter) {
@@ -7783,8 +7531,14 @@ System.register("dist/app", ["aurelia-router"], function(_export) {
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
+      _classCallCheck = function(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError("Cannot call a class as a function");
+        }
+      };
       App = _export("App", (function() {
         function App(router) {
+          _classCallCheck(this, App);
           this.router = router;
           this.router.configure(function(config) {
             config.title = "Aurelia";
@@ -7824,6 +7578,7 @@ System.register("dist/child-router", ["aurelia-router"], function(_export) {
   "use strict";
   var Router,
       _prototypeProperties,
+      _classCallCheck,
       Welcome;
   return {
     setters: [function(_aureliaRouter) {
@@ -7836,8 +7591,14 @@ System.register("dist/child-router", ["aurelia-router"], function(_export) {
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
+      _classCallCheck = function(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError("Cannot call a class as a function");
+        }
+      };
       Welcome = _export("Welcome", (function() {
         function Welcome(router) {
+          _classCallCheck(this, Welcome);
           this.heading = "Child Router";
           this.router = router;
           router.configure(function(config) {
@@ -7873,7 +7634,7 @@ System.register("dist/child-router", ["aurelia-router"], function(_export) {
 
 
 
-System.register("github:aurelia/http-client@0.4.3/system/headers", [], function(_export) {
+System.register("github:aurelia/http-client@0.4.4/system/headers", [], function(_export) {
   "use strict";
   var _prototypeProperties,
       Headers;
@@ -7886,7 +7647,7 @@ System.register("github:aurelia/http-client@0.4.3/system/headers", [], function(
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      Headers = (function() {
+      Headers = _export("Headers", (function() {
         function Headers() {
           var headers = arguments[0] === undefined ? {} : arguments[0];
           this.headers = headers;
@@ -7897,7 +7658,6 @@ System.register("github:aurelia/http-client@0.4.3/system/headers", [], function(
               this.headers[key] = value;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           get: {
@@ -7905,7 +7665,6 @@ System.register("github:aurelia/http-client@0.4.3/system/headers", [], function(
               return this.headers[key];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           clear: {
@@ -7913,7 +7672,6 @@ System.register("github:aurelia/http-client@0.4.3/system/headers", [], function(
               this.headers = {};
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           configureXHR: {
@@ -7925,20 +7683,18 @@ System.register("github:aurelia/http-client@0.4.3/system/headers", [], function(
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Headers;
-      })();
-      _export("Headers", Headers);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/http-client@0.4.3/system/http-response-message", ["./headers"], function(_export) {
+System.register("github:aurelia/http-client@0.4.4/system/http-response-message", ["./headers"], function(_export) {
   "use strict";
   var Headers,
       _prototypeProperties,
@@ -7971,7 +7727,7 @@ System.register("github:aurelia/http-client@0.4.3/system/http-response-message",
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      HttpResponseMessage = (function() {
+      HttpResponseMessage = _export("HttpResponseMessage", (function() {
         function HttpResponseMessage(requestMessage, xhr, responseType, reviver) {
           this.requestMessage = requestMessage;
           this.statusCode = xhr.status;
@@ -7999,19 +7755,17 @@ System.register("github:aurelia/http-client@0.4.3/system/http-response-message",
               }
               return this._content = this.response;
             },
-            enumerable: true,
             configurable: true
           }});
         return HttpResponseMessage;
-      })();
-      _export("HttpResponseMessage", HttpResponseMessage);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/http-client@0.4.3/system/jsonp-request-message", ["./http-response-message"], function(_export) {
+System.register("github:aurelia/http-client@0.4.4/system/jsonp-request-message", ["./http-response-message"], function(_export) {
   "use strict";
   var HttpResponseMessage,
       _prototypeProperties,
@@ -8027,7 +7781,7 @@ System.register("github:aurelia/http-client@0.4.3/system/jsonp-request-message",
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      JSONPRequestMessage = (function() {
+      JSONPRequestMessage = _export("JSONPRequestMessage", (function() {
         function JSONPRequestMessage(uri, callbackParameterName) {
           this.uri = uri;
           this.callbackParameterName = callbackParameterName;
@@ -8053,12 +7807,10 @@ System.register("github:aurelia/http-client@0.4.3/system/jsonp-request-message",
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return JSONPRequestMessage;
-      })();
-      _export("JSONPRequestMessage", JSONPRequestMessage);
+      })());
     }
   };
 });
@@ -8068,6 +7820,7 @@ System.register("github:aurelia/http-client@0.4.3/system/jsonp-request-message",
 System.register("dist/welcome", [], function(_export) {
   "use strict";
   var _prototypeProperties,
+      _classCallCheck,
       Welcome,
       UpperValueConverter;
   return {
@@ -8079,8 +7832,14 @@ System.register("dist/welcome", [], function(_export) {
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
+      _classCallCheck = function(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError("Cannot call a class as a function");
+        }
+      };
       Welcome = _export("Welcome", (function() {
         function Welcome() {
+          _classCallCheck(this, Welcome);
           this.heading = "Welcome to the Aurelia Navigation App!";
           this.firstName = "John";
           this.lastName = "Doe";
@@ -8103,7 +7862,9 @@ System.register("dist/welcome", [], function(_export) {
         return Welcome;
       })());
       UpperValueConverter = _export("UpperValueConverter", (function() {
-        function UpperValueConverter() {}
+        function UpperValueConverter() {
+          _classCallCheck(this, UpperValueConverter);
+        }
         _prototypeProperties(UpperValueConverter, null, {toView: {
             value: function toView(value) {
               return value && value.toUpperCase();
@@ -8171,7 +7932,7 @@ System.register("github:aurelia/logging@0.2.2", ["github:aurelia/logging@0.2.2/s
 
 
 
-System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["aurelia-metadata", "./metadata", "./util"], function(_export) {
+System.register("github:aurelia/dependency-injection@0.4.2/system/container", ["aurelia-metadata", "./metadata", "./util"], function(_export) {
   "use strict";
   var Metadata,
       Resolver,
@@ -8197,7 +7958,7 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
           Object.defineProperties(child.prototype, instanceProps);
       };
       emptyParameters = Object.freeze([]);
-      Container = (function() {
+      Container = _export("Container", (function() {
         function Container(constructionInfo) {
           this.constructionInfo = constructionInfo || new Map();
           this.entries = new Map();
@@ -8213,14 +7974,13 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
                 if (parameters) {
                   keys = new Array(parameters.length);
                   for (i = 0, ii = parameters.length; i < ii; ++i) {
-                    keys[i] = parameters[i].is;
+                    keys[i] = parameters[i].is || parameters[i][0];
                   }
                 }
                 return keys;
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           addParameterInfoLocator: {
@@ -8235,7 +7995,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           registerInstance: {
@@ -8245,7 +8004,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           registerTransient: {
@@ -8256,7 +8014,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           registerSingleton: {
@@ -8268,7 +8025,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           autoRegister: {
@@ -8281,7 +8037,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           autoRegisterAll: {
@@ -8292,7 +8047,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           registerHandler: {
@@ -8300,7 +8054,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               this.getOrCreateEntry(key).push(handler);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           get: {
@@ -8324,7 +8077,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               return entry[0](this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getAll: {
@@ -8342,7 +8094,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               return [];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           hasHandler: {
@@ -8351,7 +8102,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               return this.entries.has(key) || checkParent && this.parent && this.parent.hasHandler(key, checkParent);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           createChild: {
@@ -8362,7 +8112,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               return childContainer;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           invoke: {
@@ -8387,7 +8136,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getOrCreateEntry: {
@@ -8400,7 +8148,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               return entry;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getOrCreateConstructionInfo: {
@@ -8413,7 +8160,6 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               return info;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           createConstructionInfo: {
@@ -8435,20 +8181,18 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/container", ["
               return info;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Container;
-      })();
-      _export("Container", Container);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/task-queue@0.2.2", ["github:aurelia/task-queue@0.2.2/system/index"], function($__export) {
+System.register("github:aurelia/task-queue@0.2.3", ["github:aurelia/task-queue@0.2.3/system/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -8460,7 +8204,7 @@ System.register("github:aurelia/task-queue@0.2.2", ["github:aurelia/task-queue@0
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./array-change-records"], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/array-observation", ["./array-change-records"], function(_export) {
   "use strict";
   var calcSplices,
       projectArraySplices,
@@ -8492,13 +8236,13 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
       };
       arrayProto = Array.prototype;
       hasArrayObserve = (function detectArrayObserve() {
-        var callback = function(recs) {
-          records = recs;
-        };
         if (typeof Array.observe !== "function") {
           return false;
         }
         var records = [];
+        function callback(recs) {
+          records = recs;
+        }
         var arr = [];
         Array.observe(arr, callback);
         arr.push(1, 2);
@@ -8592,7 +8336,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               return observer;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {
           subscribe: {
@@ -8604,7 +8347,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           addChangeRecord: {
@@ -8619,7 +8361,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           reset: {
@@ -8634,7 +8375,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getObserver: {
@@ -8646,7 +8386,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           call: {
@@ -8674,7 +8413,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
@@ -8703,7 +8441,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getObserver: {
@@ -8715,7 +8452,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           handleChanges: {
@@ -8735,7 +8471,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
@@ -8753,7 +8488,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               return this.array.length;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           setValue: {
@@ -8761,7 +8495,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               this.array.length = newValue;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           subscribe: {
@@ -8773,7 +8506,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           call: {
@@ -8787,7 +8519,6 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
               this.currentValue = newValue;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
@@ -8799,7 +8530,7 @@ System.register("github:aurelia/binding@0.3.2/system/array-observation", ["./arr
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "./composite-observer"], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/ast", ["./path-observer", "./composite-observer"], function(_export) {
   "use strict";
   var PathObserver,
       CompositeObserver,
@@ -8935,7 +8666,7 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      Expression = (function() {
+      Expression = _export("Expression", (function() {
         function Expression() {
           this.isChain = false;
           this.isAssignable = false;
@@ -8946,7 +8677,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               throw new Error("Cannot evaluate " + this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           assign: {
@@ -8954,7 +8684,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               throw new Error("Cannot assign to " + this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           toString: {
@@ -8962,14 +8691,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return Unparser.unparse(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Expression;
-      })();
-      _export("Expression", Expression);
-      Chain = (function(Expression) {
+      })());
+      Chain = _export("Chain", (function(Expression) {
         function Chain(expressions) {
           _get(Object.getPrototypeOf(Chain.prototype), "constructor", this).call(this);
           this.expressions = expressions;
@@ -8993,7 +8720,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return result;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9001,14 +8727,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitChain(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Chain;
-      })(Expression);
-      _export("Chain", Chain);
-      ValueConverter = (function(Expression) {
+      })(Expression));
+      ValueConverter = _export("ValueConverter", (function(Expression) {
         function ValueConverter(expression, name, args, allArgs) {
           _get(Object.getPrototypeOf(ValueConverter.prototype), "constructor", this).call(this);
           this.expression = expression;
@@ -9030,7 +8754,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return this.allArgs[0].evaluate(scope, valueConverters);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           assign: {
@@ -9045,7 +8768,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return this.allArgs[0].assign(scope, value, valueConverters);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9053,7 +8775,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitValueConverter(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
@@ -9083,14 +8804,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ValueConverter;
-      })(Expression);
-      _export("ValueConverter", ValueConverter);
-      Assign = (function(Expression) {
+      })(Expression));
+      Assign = _export("Assign", (function(Expression) {
         function Assign(target, value) {
           _get(Object.getPrototypeOf(Assign.prototype), "constructor", this).call(this);
           this.target = target;
@@ -9103,7 +8822,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return this.target.assign(scope, this.value.evaluate(scope, valueConverters));
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9111,7 +8829,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               vistor.visitAssign(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
@@ -9119,14 +8836,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return {value: this.evaluate(scope, binding.valueConverterLookupFunction)};
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Assign;
-      })(Expression);
-      _export("Assign", Assign);
-      Conditional = (function(Expression) {
+      })(Expression));
+      Conditional = _export("Conditional", (function(Expression) {
         function Conditional(condition, yes, no) {
           _get(Object.getPrototypeOf(Conditional.prototype), "constructor", this).call(this);
           this.condition = condition;
@@ -9140,7 +8855,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return !!this.condition.evaluate(scope) ? this.yes.evaluate(scope) : this.no.evaluate(scope);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9148,12 +8862,11 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitConditional(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
             value: function connect(binding, scope) {
-              var _this2 = this;
+              var _this = this;
               var conditionInfo = this.condition.connect(binding, scope),
                   yesInfo = this.yes.connect(binding, scope),
                   noInfo = this.no.connect(binding, scope),
@@ -9170,7 +8883,7 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               }
               if (childObservers.length) {
                 observer = new CompositeObserver(childObservers, function() {
-                  return _this2.evaluate(scope, binding.valueConverterLookupFunction);
+                  return _this.evaluate(scope, binding.valueConverterLookupFunction);
                 });
               }
               return {
@@ -9179,14 +8892,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Conditional;
-      })(Expression);
-      _export("Conditional", Conditional);
-      AccessScope = (function(Expression) {
+      })(Expression));
+      AccessScope = _export("AccessScope", (function(Expression) {
         function AccessScope(name) {
           _get(Object.getPrototypeOf(AccessScope.prototype), "constructor", this).call(this);
           this.name = name;
@@ -9199,7 +8910,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return scope[this.name];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           assign: {
@@ -9207,7 +8917,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return scope[this.name] = value;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9215,7 +8924,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitAccessScope(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
@@ -9227,14 +8935,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return AccessScope;
-      })(Expression);
-      _export("AccessScope", AccessScope);
-      AccessMember = (function(Expression) {
+      })(Expression));
+      AccessMember = _export("AccessMember", (function(Expression) {
         function AccessMember(object, name) {
           _get(Object.getPrototypeOf(AccessMember.prototype), "constructor", this).call(this);
           this.object = object;
@@ -9246,23 +8952,21 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
           evaluate: {
             value: function evaluate(scope, valueConverters) {
               var instance = this.object.evaluate(scope, valueConverters);
-              return instance === null ? null : instance[this.name];
+              return instance === null || instance === undefined ? instance : instance[this.name];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           assign: {
             value: function assign(scope, value) {
               var instance = this.object.evaluate(scope);
-              if (!instance) {
+              if (instance === null || instance === undefined) {
                 instance = {};
                 this.object.assign(scope, instance);
               }
               return instance[this.name] = value;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9270,22 +8974,21 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitAccessMember(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
             value: function connect(binding, scope) {
-              var _this3 = this;
+              var _this = this;
               var info = this.object.connect(binding, scope),
                   objectInstance = info.value,
                   objectObserver = info.observer,
                   observer;
               if (objectObserver) {
                 observer = new PathObserver(objectObserver, function(value) {
-                  if (value == null) {
-                    return null;
+                  if (value == null || value == undefined) {
+                    return value;
                   }
-                  return binding.getObserver(value, _this3.name);
+                  return binding.getObserver(value, _this.name);
                 }, objectInstance);
               } else {
                 observer = binding.getObserver(objectInstance, this.name);
@@ -9296,14 +8999,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return AccessMember;
-      })(Expression);
-      _export("AccessMember", AccessMember);
-      AccessKeyed = (function(Expression) {
+      })(Expression));
+      AccessKeyed = _export("AccessKeyed", (function(Expression) {
         function AccessKeyed(object, key) {
           _get(Object.getPrototypeOf(AccessKeyed.prototype), "constructor", this).call(this);
           this.object = object;
@@ -9319,7 +9020,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return getKeyed(instance, lookup);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           assign: {
@@ -9329,7 +9029,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return setKeyed(instance, lookup, value);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9337,12 +9036,11 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitAccessKeyed(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
             value: function connect(binding, scope) {
-              var _this4 = this;
+              var _this = this;
               var objectInfo = this.object.connect(binding, scope),
                   keyInfo = this.key.connect(binding, scope),
                   childObservers = [],
@@ -9355,7 +9053,7 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               }
               if (childObservers.length) {
                 observer = new CompositeObserver(childObservers, function() {
-                  return _this4.evaluate(scope, binding.valueConverterLookupFunction);
+                  return _this.evaluate(scope, binding.valueConverterLookupFunction);
                 });
               }
               return {
@@ -9364,14 +9062,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return AccessKeyed;
-      })(Expression);
-      _export("AccessKeyed", AccessKeyed);
-      CallScope = (function(Expression) {
+      })(Expression));
+      CallScope = _export("CallScope", (function(Expression) {
         function CallScope(name, args) {
           _get(Object.getPrototypeOf(CallScope.prototype), "constructor", this).call(this);
           this.name = name;
@@ -9385,7 +9081,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return ensureFunctionFromMap(scope, this.name).apply(scope, args);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9393,12 +9088,11 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitCallScope(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
             value: function connect(binding, scope) {
-              var _this5 = this;
+              var _this = this;
               var observer,
                   childObservers = [],
                   i,
@@ -9414,7 +9108,7 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               }
               if (childObservers.length) {
                 observer = new CompositeObserver(childObservers, function() {
-                  return _this5.evaluate(scope, binding.valueConverterLookupFunction);
+                  return _this.evaluate(scope, binding.valueConverterLookupFunction);
                 });
               }
               return {
@@ -9423,14 +9117,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return CallScope;
-      })(Expression);
-      _export("CallScope", CallScope);
-      CallMember = (function(Expression) {
+      })(Expression));
+      CallMember = _export("CallMember", (function(Expression) {
         function CallMember(object, name, args) {
           _get(Object.getPrototypeOf(CallMember.prototype), "constructor", this).call(this);
           this.object = object;
@@ -9446,7 +9138,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return ensureFunctionFromMap(instance, this.name).apply(instance, args);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9454,12 +9145,11 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitCallMember(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
             value: function connect(binding, scope) {
-              var _this6 = this;
+              var _this = this;
               var observer,
                   objectInfo = this.object.connect(binding, scope),
                   childObservers = [],
@@ -9479,7 +9169,7 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               }
               if (childObservers.length) {
                 observer = new CompositeObserver(childObservers, function() {
-                  return _this6.evaluate(scope, binding.valueConverterLookupFunction);
+                  return _this.evaluate(scope, binding.valueConverterLookupFunction);
                 });
               }
               return {
@@ -9488,14 +9178,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return CallMember;
-      })(Expression);
-      _export("CallMember", CallMember);
-      CallFunction = (function(Expression) {
+      })(Expression));
+      CallFunction = _export("CallFunction", (function(Expression) {
         function CallFunction(func, args) {
           _get(Object.getPrototypeOf(CallFunction.prototype), "constructor", this).call(this);
           this.func = func;
@@ -9513,7 +9201,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9521,12 +9208,11 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitCallFunction(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
             value: function connect(binding, scope) {
-              var _this7 = this;
+              var _this = this;
               var observer,
                   funcInfo = this.func.connect(binding, scope),
                   childObservers = [],
@@ -9546,7 +9232,7 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               }
               if (childObservers.length) {
                 observer = new CompositeObserver(childObservers, function() {
-                  return _this7.evaluate(scope, binding.valueConverterLookupFunction);
+                  return _this.evaluate(scope, binding.valueConverterLookupFunction);
                 });
               }
               return {
@@ -9555,14 +9241,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return CallFunction;
-      })(Expression);
-      _export("CallFunction", CallFunction);
-      Binary = (function(Expression) {
+      })(Expression));
+      Binary = _export("Binary", (function(Expression) {
         function Binary(operation, left, right) {
           _get(Object.getPrototypeOf(Binary.prototype), "constructor", this).call(this);
           this.operation = operation;
@@ -9581,6 +9265,16 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
                   return !!left || !!this.right.evaluate(scope);
               }
               var right = this.right.evaluate(scope);
+              switch (this.operation) {
+                case "==":
+                  return left == right;
+                case "===":
+                  return left === right;
+                case "!=":
+                  return left != right;
+                case "!==":
+                  return left !== right;
+              }
               if (left === null || right === null) {
                 switch (this.operation) {
                   case "+":
@@ -9609,14 +9303,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
                   return left / right;
                 case "%":
                   return left % right;
-                case "==":
-                  return left == right;
-                case "===":
-                  return left === right;
-                case "!=":
-                  return left != right;
-                case "!==":
-                  return left !== right;
                 case "<":
                   return left < right;
                 case ">":
@@ -9633,7 +9319,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               throw new Error("Internal error [" + this.operation + "] not handled");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9641,12 +9326,11 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitBinary(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
             value: function connect(binding, scope) {
-              var _this8 = this;
+              var _this = this;
               var leftInfo = this.left.connect(binding, scope),
                   rightInfo = this.right.connect(binding, scope),
                   childObservers = [],
@@ -9659,7 +9343,7 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               }
               if (childObservers.length) {
                 observer = new CompositeObserver(childObservers, function() {
-                  return _this8.evaluate(scope, binding.valueConverterLookupFunction);
+                  return _this.evaluate(scope, binding.valueConverterLookupFunction);
                 });
               }
               return {
@@ -9668,14 +9352,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Binary;
-      })(Expression);
-      _export("Binary", Binary);
-      PrefixNot = (function(Expression) {
+      })(Expression));
+      PrefixNot = _export("PrefixNot", (function(Expression) {
         function PrefixNot(operation, expression) {
           _get(Object.getPrototypeOf(PrefixNot.prototype), "constructor", this).call(this);
           this.operation = operation;
@@ -9688,7 +9370,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return !this.expression.evaluate(scope);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9696,17 +9377,16 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitPrefix(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
             value: function connect(binding, scope) {
-              var _this9 = this;
+              var _this = this;
               var info = this.expression.connect(binding, scope),
                   observer;
               if (info.observer) {
                 observer = new CompositeObserver([info.observer], function() {
-                  return _this9.evaluate(scope, binding.valueConverterLookupFunction);
+                  return _this.evaluate(scope, binding.valueConverterLookupFunction);
                 });
               }
               return {
@@ -9715,14 +9395,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return PrefixNot;
-      })(Expression);
-      _export("PrefixNot", PrefixNot);
-      LiteralPrimitive = (function(Expression) {
+      })(Expression));
+      LiteralPrimitive = _export("LiteralPrimitive", (function(Expression) {
         function LiteralPrimitive(value) {
           _get(Object.getPrototypeOf(LiteralPrimitive.prototype), "constructor", this).call(this);
           this.value = value;
@@ -9734,7 +9412,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return this.value;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9742,7 +9419,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitLiteralPrimitive(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
@@ -9750,14 +9426,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return {value: this.value};
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return LiteralPrimitive;
-      })(Expression);
-      _export("LiteralPrimitive", LiteralPrimitive);
-      LiteralString = (function(Expression) {
+      })(Expression));
+      LiteralString = _export("LiteralString", (function(Expression) {
         function LiteralString(value) {
           _get(Object.getPrototypeOf(LiteralString.prototype), "constructor", this).call(this);
           this.value = value;
@@ -9769,7 +9443,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return this.value;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9777,7 +9450,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitLiteralString(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
@@ -9785,14 +9457,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return {value: this.value};
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return LiteralString;
-      })(Expression);
-      _export("LiteralString", LiteralString);
-      LiteralArray = (function(Expression) {
+      })(Expression));
+      LiteralArray = _export("LiteralArray", (function(Expression) {
         function LiteralArray(elements) {
           _get(Object.getPrototypeOf(LiteralArray.prototype), "constructor", this).call(this);
           this.elements = elements;
@@ -9811,7 +9481,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return result;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9819,12 +9488,11 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitLiteralArray(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
             value: function connect(binding, scope) {
-              var _this10 = this;
+              var _this = this;
               var observer,
                   childObservers = [],
                   results = [],
@@ -9842,7 +9510,7 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               }
               if (childObservers.length) {
                 observer = new CompositeObserver(childObservers, function() {
-                  return _this10.evaluate(scope, binding.valueConverterLookupFunction);
+                  return _this.evaluate(scope, binding.valueConverterLookupFunction);
                 });
               }
               return {
@@ -9851,14 +9519,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return LiteralArray;
-      })(Expression);
-      _export("LiteralArray", LiteralArray);
-      LiteralObject = (function(Expression) {
+      })(Expression));
+      LiteralObject = _export("LiteralObject", (function(Expression) {
         function LiteralObject(keys, values) {
           _get(Object.getPrototypeOf(LiteralObject.prototype), "constructor", this).call(this);
           this.keys = keys;
@@ -9879,7 +9545,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return instance;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           accept: {
@@ -9887,12 +9552,11 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               visitor.visitLiteralObject(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           connect: {
             value: function connect(binding, scope) {
-              var _this11 = this;
+              var _this = this;
               var observer,
                   childObservers = [],
                   instance = {},
@@ -9910,7 +9574,7 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               }
               if (childObservers.length) {
                 observer = new CompositeObserver(childObservers, function() {
-                  return _this11.evaluate(scope, binding.valueConverterLookupFunction);
+                  return _this.evaluate(scope, binding.valueConverterLookupFunction);
                 });
               }
               return {
@@ -9919,14 +9583,12 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return LiteralObject;
-      })(Expression);
-      _export("LiteralObject", LiteralObject);
-      Unparser = (function() {
+      })(Expression));
+      Unparser = _export("Unparser", (function() {
         function Unparser(buffer) {
           this.buffer = buffer;
         }
@@ -9938,7 +9600,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               return buffer.join("");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {
           write: {
@@ -9946,7 +9607,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.buffer.push(text);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           writeArgs: {
@@ -9963,7 +9623,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.write(")");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitChain: {
@@ -9979,7 +9638,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitValueConverter: {
@@ -9997,7 +9655,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.write(")");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitAssign: {
@@ -10007,7 +9664,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               assign.value.accept(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitConditional: {
@@ -10019,7 +9675,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               conditional.no.accept(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitAccessScope: {
@@ -10027,7 +9682,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.write(access.name);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitAccessMember: {
@@ -10036,7 +9690,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.write("." + access.name);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitAccessKeyed: {
@@ -10047,7 +9700,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.write("]");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitCallScope: {
@@ -10056,7 +9708,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.writeArgs(call.args);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitCallFunction: {
@@ -10065,7 +9716,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.writeArgs(call.args);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitCallMember: {
@@ -10075,7 +9725,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.writeArgs(call.args);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitPrefix: {
@@ -10085,7 +9734,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.write(")");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitBinary: {
@@ -10097,7 +9745,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.write(")");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitLiteralPrimitive: {
@@ -10105,7 +9752,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.write("" + literal.value);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitLiteralArray: {
@@ -10123,7 +9769,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.write("]");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitLiteralObject: {
@@ -10143,7 +9788,6 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.write("}");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           visitLiteralString: {
@@ -10152,13 +9796,11 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
               this.write("'" + escaped + "'");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Unparser;
-      })();
-      _export("Unparser", Unparser);
+      })());
       evalListCache = [[], [0], [0, 0], [0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0, 0]];
     }
   };
@@ -10166,7 +9808,7 @@ System.register("github:aurelia/binding@0.3.2/system/ast", ["./path-observer", "
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/behaviors", ["aurelia-metadata", "aurelia-task-queue", "aurelia-binding", "./children", "./property", "./util"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/behaviors", ["aurelia-metadata", "aurelia-task-queue", "aurelia-binding", "./children", "./property", "./util"], function(_export) {
   "use strict";
   var Metadata,
       TaskQueue,
@@ -10237,7 +9879,7 @@ System.register("github:aurelia/templating@0.8.7/system/behaviors", ["aurelia-me
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/view-factory", ["aurelia-dependency-injection", "./view", "./view-slot", "./content-selector", "./resource-registry"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/view-factory", ["aurelia-dependency-injection", "./view", "./view-slot", "./content-selector", "./resource-registry"], function(_export) {
   "use strict";
   var Container,
       View,
@@ -10336,7 +9978,7 @@ System.register("github:aurelia/templating@0.8.7/system/view-factory", ["aurelia
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      BoundViewFactory = (function() {
+      BoundViewFactory = _export("BoundViewFactory", (function() {
         function BoundViewFactory(parentContainer, viewFactory, executionContext) {
           this.parentContainer = parentContainer;
           this.viewFactory = viewFactory;
@@ -10351,17 +9993,15 @@ System.register("github:aurelia/templating@0.8.7/system/view-factory", ["aurelia
               return this.viewFactory.create(childContainer, context, this.factoryOptions);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return BoundViewFactory;
-      })();
-      _export("BoundViewFactory", BoundViewFactory);
+      })());
       defaultFactoryOptions = {
         systemControlled: false,
         suppressBind: false
       };
-      ViewFactory = (function() {
+      ViewFactory = _export("ViewFactory", (function() {
         function ViewFactory(template, instructions, resources) {
           this.template = template;
           this.instructions = instructions;
@@ -10369,39 +10009,34 @@ System.register("github:aurelia/templating@0.8.7/system/view-factory", ["aurelia
         }
         _prototypeProperties(ViewFactory, null, {create: {
             value: function create(container, executionContext) {
-              var _this = this;
               var options = arguments[2] === undefined ? defaultFactoryOptions : arguments[2];
-              return (function() {
-                var fragment = _this.template.cloneNode(true),
-                    instructables = fragment.querySelectorAll(".au-target"),
-                    instructions = _this.instructions,
-                    resources = _this.resources,
-                    behaviors = [],
-                    bindings = [],
-                    children = [],
-                    contentSelectors = [],
-                    containers = {root: container},
-                    i,
-                    ii,
-                    view;
-                for (i = 0, ii = instructables.length; i < ii; ++i) {
-                  applyInstructions(containers, executionContext, instructables[i], instructions[i], behaviors, bindings, children, contentSelectors, resources);
-                }
-                view = new View(fragment, behaviors, bindings, children, options.systemControlled, contentSelectors);
-                view.created(executionContext);
-                if (!options.suppressBind) {
-                  view.bind(executionContext);
-                }
-                return view;
-              })();
+              var fragment = this.template.cloneNode(true),
+                  instructables = fragment.querySelectorAll(".au-target"),
+                  instructions = this.instructions,
+                  resources = this.resources,
+                  behaviors = [],
+                  bindings = [],
+                  children = [],
+                  contentSelectors = [],
+                  containers = {root: container},
+                  i,
+                  ii,
+                  view;
+              for (i = 0, ii = instructables.length; i < ii; ++i) {
+                applyInstructions(containers, executionContext, instructables[i], instructions[i], behaviors, bindings, children, contentSelectors, resources);
+              }
+              view = new View(fragment, behaviors, bindings, children, options.systemControlled, contentSelectors);
+              view.created(executionContext);
+              if (!options.suppressBind) {
+                view.bind(executionContext);
+              }
+              return view;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return ViewFactory;
-      })();
-      _export("ViewFactory", ViewFactory);
+      })());
     }
   };
 });
@@ -11146,7 +10781,7 @@ System.register("github:aurelia/route-recognizer@0.2.2/system/index", ["./dsl"],
 
 
 
-System.register("github:aurelia/router@0.5.3/system/navigation-context", ["./navigation-plan"], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/navigation-context", ["./navigation-plan"], function(_export) {
   "use strict";
   var REPLACE,
       _prototypeProperties,
@@ -11283,7 +10918,7 @@ System.register("github:aurelia/history@0.2.2", ["github:aurelia/history@0.2.2/s
 
 
 
-System.register("github:aurelia/router@0.5.3/system/activation", ["./navigation-plan", "./navigation-commands", "./util"], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/activation", ["./navigation-plan", "./navigation-commands", "./util"], function(_export) {
   "use strict";
   var INVOKE_LIFECYCLE,
       REPLACE,
@@ -11492,7 +11127,7 @@ System.register("github:aurelia/router@0.5.3/system/activation", ["./navigation-
 
 
 
-System.register("github:aurelia/templating-resources@0.8.4/system/index", ["./compose", "./if", "./repeat", "./show", "./selected-item", "./global-behavior"], function(_export) {
+System.register("github:aurelia/templating-resources@0.8.5/system/index", ["./compose", "./if", "./repeat", "./show", "./selected-item", "./global-behavior"], function(_export) {
   "use strict";
   var Compose,
       If,
@@ -11555,7 +11190,7 @@ System.register("github:aurelia/history-browser@0.2.3", ["github:aurelia/history
 
 
 
-System.register("github:aurelia/http-client@0.4.3/system/http-request-message", ["./headers", "./http-response-message"], function(_export) {
+System.register("github:aurelia/http-client@0.4.4/system/http-request-message", ["./headers", "./http-response-message"], function(_export) {
   "use strict";
   var Headers,
       HttpResponseMessage,
@@ -11574,7 +11209,7 @@ System.register("github:aurelia/http-client@0.4.3/system/http-request-message", 
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      HttpRequestMessage = (function() {
+      HttpRequestMessage = _export("HttpRequestMessage", (function() {
         function HttpRequestMessage(method, uri, content, replacer) {
           this.method = method;
           this.uri = uri;
@@ -11590,7 +11225,6 @@ System.register("github:aurelia/http-client@0.4.3/system/http-request-message", 
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           configureXHR: {
@@ -11600,7 +11234,6 @@ System.register("github:aurelia/http-client@0.4.3/system/http-request-message", 
               this.headers.configureXHR(xhr);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           formatContent: {
@@ -11624,7 +11257,6 @@ System.register("github:aurelia/http-client@0.4.3/system/http-request-message", 
               return JSON.stringify(content, this.replacer);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           send: {
@@ -11644,10 +11276,18 @@ System.register("github:aurelia/http-client@0.4.3/system/http-request-message", 
                   resolve(new HttpResponseMessage(_this, xhr, responseType, client.reviver));
                 };
                 xhr.ontimeout = function(e) {
-                  reject(new Error(e));
+                  reject(new HttpResponseMessage(_this, {
+                    response: e,
+                    status: xhr.status,
+                    statusText: xhr.statusText
+                  }, "timeout"));
                 };
                 xhr.onerror = function(e) {
-                  reject(new Error(e));
+                  reject(new HttpResponseMessage(_this, {
+                    response: e,
+                    status: xhr.status,
+                    statusText: xhr.statusText
+                  }, "error"));
                 };
                 if (progressCallback) {
                   xhr.upload.onprogress = progressCallback;
@@ -11656,13 +11296,11 @@ System.register("github:aurelia/http-client@0.4.3/system/http-request-message", 
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return HttpRequestMessage;
-      })();
-      _export("HttpRequestMessage", HttpRequestMessage);
+      })());
     }
   };
 });
@@ -11681,7 +11319,7 @@ System.register("github:aurelia/metadata@0.3.1", ["github:aurelia/metadata@0.3.1
 
 
 
-System.register("github:aurelia/dependency-injection@0.4.1/system/index", ["aurelia-metadata", "./metadata", "./container"], function(_export) {
+System.register("github:aurelia/dependency-injection@0.4.2/system/index", ["aurelia-metadata", "./metadata", "./container"], function(_export) {
   "use strict";
   var Metadata,
       Transient,
@@ -11712,7 +11350,7 @@ System.register("github:aurelia/dependency-injection@0.4.1/system/index", ["aure
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/observer-locator", ["aurelia-task-queue", "./array-observation", "./event-manager", "./dirty-checking", "./property-observation"], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/observer-locator", ["aurelia-task-queue", "./array-observation", "./event-manager", "./dirty-checking", "./property-observation", "aurelia-dependency-injection"], function(_export) {
   "use strict";
   var TaskQueue,
       getArrayObserver,
@@ -11723,9 +11361,11 @@ System.register("github:aurelia/binding@0.3.2/system/observer-locator", ["aureli
       OoObjectObserver,
       OoPropertyObserver,
       ElementObserver,
+      All,
       _prototypeProperties,
       hasObjectObserve,
-      ObserverLocator;
+      ObserverLocator,
+      ObjectObservationAdapter;
   function createObserversLookup(obj) {
     var value = {};
     Object.defineProperty(obj, "__observers__", {
@@ -11761,6 +11401,8 @@ System.register("github:aurelia/binding@0.3.2/system/observer-locator", ["aureli
       OoObjectObserver = _propertyObservation.OoObjectObserver;
       OoPropertyObserver = _propertyObservation.OoPropertyObserver;
       ElementObserver = _propertyObservation.ElementObserver;
+    }, function(_aureliaDependencyInjection) {
+      All = _aureliaDependencyInjection.All;
     }],
     execute: function() {
       _prototypeProperties = function(child, staticProps, instanceProps) {
@@ -11781,13 +11423,13 @@ System.register("github:aurelia/binding@0.3.2/system/observer-locator", ["aureli
         };
       }
       hasObjectObserve = (function detectObjectObserve() {
-        var callback = function(recs) {
-          records = recs;
-        };
         if (typeof Object.observe !== "function") {
           return false;
         }
         var records = [];
+        function callback(recs) {
+          records = recs;
+        }
         var test = {};
         Object.observe(test, callback);
         test.id = 1;
@@ -11802,18 +11444,18 @@ System.register("github:aurelia/binding@0.3.2/system/observer-locator", ["aureli
         Object.unobserve(test, callback);
         return true;
       })();
-      ObserverLocator = (function() {
-        function ObserverLocator(taskQueue, eventManager, dirtyChecker) {
+      ObserverLocator = _export("ObserverLocator", (function() {
+        function ObserverLocator(taskQueue, eventManager, dirtyChecker, observationAdapters) {
           this.taskQueue = taskQueue;
           this.eventManager = eventManager;
           this.dirtyChecker = dirtyChecker;
+          this.observationAdapters = observationAdapters;
         }
         _prototypeProperties(ObserverLocator, {inject: {
             value: function inject() {
-              return [TaskQueue, EventManager, DirtyChecker];
+              return [TaskQueue, EventManager, DirtyChecker, All.of(ObjectObservationAdapter)];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {
           getObserversLookup: {
@@ -11821,7 +11463,6 @@ System.register("github:aurelia/binding@0.3.2/system/observer-locator", ["aureli
               return obj.__observers__ || createObserversLookup(obj);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getObserver: {
@@ -11833,14 +11474,29 @@ System.register("github:aurelia/binding@0.3.2/system/observer-locator", ["aureli
               return observersLookup[propertyName] = this.createPropertyObserver(obj, propertyName);
             },
             writable: true,
-            enumerable: true,
+            configurable: true
+          },
+          getObservationAdapter: {
+            value: function getObservationAdapter(obj, propertyName) {
+              var i,
+                  ii,
+                  observationAdapter;
+              for (i = 0, ii = this.observationAdapters.length; i < ii; i++) {
+                observationAdapter = this.observationAdapters[i];
+                if (observationAdapter.handlesProperty(obj, propertyName))
+                  return observationAdapter;
+              }
+              return null;
+            },
+            writable: true,
             configurable: true
           },
           createPropertyObserver: {
             value: function createPropertyObserver(obj, propertyName) {
               var observerLookup,
                   descriptor,
-                  handler;
+                  handler,
+                  observationAdapter;
               if (obj instanceof Element) {
                 handler = this.eventManager.getElementHandler(obj);
                 if (handler) {
@@ -11849,6 +11505,9 @@ System.register("github:aurelia/binding@0.3.2/system/observer-locator", ["aureli
               }
               descriptor = Object.getPropertyDescriptor(obj, propertyName);
               if (descriptor && (descriptor.get || descriptor.set)) {
+                observationAdapter = this.getObservationAdapter(obj, propertyName);
+                if (observationAdapter)
+                  return observationAdapter.getObserver(obj, propertyName);
                 return new DirtyCheckProperty(this.dirtyChecker, obj, propertyName);
               }
               if (hasObjectObserve) {
@@ -11862,7 +11521,6 @@ System.register("github:aurelia/binding@0.3.2/system/observer-locator", ["aureli
               return new SetterObserver(this.taskQueue, obj, propertyName);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           getArrayObserver: {
@@ -11881,20 +11539,38 @@ System.register("github:aurelia/binding@0.3.2/system/observer-locator", ["aureli
               return array.__array_observer__ = getArrayObserver(this.taskQueue, array);
             }),
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ObserverLocator;
-      })();
-      _export("ObserverLocator", ObserverLocator);
+      })());
+      ObjectObservationAdapter = _export("ObjectObservationAdapter", (function() {
+        function ObjectObservationAdapter() {}
+        _prototypeProperties(ObjectObservationAdapter, null, {
+          handlesProperty: {
+            value: function handlesProperty(object, propertyName) {
+              throw new Error("BindingAdapters must implement handlesProperty(object, propertyName).");
+            },
+            writable: true,
+            configurable: true
+          },
+          getObserver: {
+            value: function getObserver(object, propertyName) {
+              throw new Error("BindingAdapters must implement createObserver(object, propertyName).");
+            },
+            writable: true,
+            configurable: true
+          }
+        });
+        return ObjectObservationAdapter;
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast"], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/parser", ["./lexer", "./ast"], function(_export) {
   "use strict";
   var Lexer,
       Token,
@@ -11952,7 +11628,7 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
           Object.defineProperties(child.prototype, instanceProps);
       };
       EOF = new Token(-1, null);
-      Parser = (function() {
+      Parser = _export("Parser", (function() {
         function Parser() {
           this.cache = {};
           this.lexer = new Lexer();
@@ -11963,13 +11639,11 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               return this.cache[input] || (this.cache[input] = new ParserImplementation(this.lexer, input).parseChain());
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }});
         return Parser;
-      })();
-      _export("Parser", Parser);
-      ParserImplementation = (function() {
+      })());
+      ParserImplementation = _export("ParserImplementation", (function() {
         function ParserImplementation(lexer, input) {
           this.index = 0;
           this.input = input;
@@ -11980,7 +11654,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
             get: function() {
               return this.index < this.tokens.length ? this.tokens[this.index] : EOF;
             },
-            enumerable: true,
             configurable: true
           },
           parseChain: {
@@ -12006,7 +11679,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               return expressions.length === 1 ? expressions[0] : new Chain(expressions);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseValueConverter: {
@@ -12024,7 +11696,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               return result;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseExpression: {
@@ -12043,7 +11714,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               return result;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseConditional: {
@@ -12063,7 +11733,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               return result;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseLogicalOr: {
@@ -12075,7 +11744,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               return result;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseLogicalAnd: {
@@ -12087,7 +11755,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               return result;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseEquality: {
@@ -12108,7 +11775,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseRelational: {
@@ -12129,7 +11795,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseAdditive: {
@@ -12146,7 +11811,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseMultiplicative: {
@@ -12165,7 +11829,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parsePrefix: {
@@ -12181,7 +11844,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseAccessOrCallMember: {
@@ -12212,7 +11874,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parsePrimary: {
@@ -12246,7 +11907,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseAccessOrCallScope: {
@@ -12261,7 +11921,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               return new CallScope(name, args);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseObject: {
@@ -12282,7 +11941,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               return new LiteralObject(keys, values);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           parseExpressionList: {
@@ -12296,7 +11954,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               return result;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           optional: {
@@ -12308,7 +11965,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               return false;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           expect: {
@@ -12320,7 +11976,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           advance: {
@@ -12328,7 +11983,6 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               this.index++;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           error: {
@@ -12337,20 +11991,18 @@ System.register("github:aurelia/binding@0.3.2/system/parser", ["./lexer", "./ast
               throw new Error("Parser Error: " + message + " " + location + " [" + this.input + "]");
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ParserImplementation;
-      })();
-      _export("ParserImplementation", ParserImplementation);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/attached-behavior", ["aurelia-metadata", "./behavior-instance", "./behaviors", "./util"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/attached-behavior", ["aurelia-metadata", "./behavior-instance", "./behaviors", "./util"], function(_export) {
   "use strict";
   var ResourceType,
       BehaviorInstance,
@@ -12389,7 +12041,7 @@ System.register("github:aurelia/templating@0.8.7/system/attached-behavior", ["au
         if (superClass)
           subClass.__proto__ = superClass;
       };
-      AttachedBehavior = (function(ResourceType) {
+      AttachedBehavior = _export("AttachedBehavior", (function(ResourceType) {
         function AttachedBehavior(attribute) {
           this.name = attribute;
           this.properties = [];
@@ -12403,7 +12055,6 @@ System.register("github:aurelia/templating@0.8.7/system/attached-behavior", ["au
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {
           analyze: {
@@ -12411,7 +12062,6 @@ System.register("github:aurelia/templating@0.8.7/system/attached-behavior", ["au
               configureBehavior(container, this, target);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           load: {
@@ -12419,7 +12069,6 @@ System.register("github:aurelia/templating@0.8.7/system/attached-behavior", ["au
               return Promise.resolve(this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           register: {
@@ -12427,7 +12076,6 @@ System.register("github:aurelia/templating@0.8.7/system/attached-behavior", ["au
               registry.registerAttribute(name || this.name, this, this.name);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           compile: {
@@ -12436,7 +12084,6 @@ System.register("github:aurelia/templating@0.8.7/system/attached-behavior", ["au
               return node;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           create: {
@@ -12449,20 +12096,18 @@ System.register("github:aurelia/templating@0.8.7/system/attached-behavior", ["au
               return behaviorInstance;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return AttachedBehavior;
-      })(ResourceType);
-      _export("AttachedBehavior", AttachedBehavior);
+      })(ResourceType));
     }
   };
 });
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/view-compiler", ["./resource-registry", "./view-factory", "./binding-language"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/view-compiler", ["./resource-registry", "./view-factory", "./binding-language"], function(_export) {
   "use strict";
   var ResourceRegistry,
       ViewFactory,
@@ -12482,7 +12127,7 @@ System.register("github:aurelia/templating@0.8.7/system/view-compiler", ["./reso
         property,
         key,
         value;
-    var knownAttribute = resources.attributeMap[attrName];
+    var knownAttribute = resources.mapAttribute(attrName);
     if (knownAttribute && attrName in attributes && knownAttribute !== attrName) {
       attributes[knownAttribute] = attributes[attrName];
       delete attributes[attrName];
@@ -12521,7 +12166,7 @@ System.register("github:aurelia/templating@0.8.7/system/view-compiler", ["./reso
       nextInjectorId = 0;
       defaultCompileOptions = {targetShadowDOM: false};
       hasShadowDOM = !!HTMLElement.prototype.createShadowRoot;
-      ViewCompiler = (function() {
+      ViewCompiler = _export("ViewCompiler", (function() {
         function ViewCompiler(bindingLanguage) {
           this.bindingLanguage = bindingLanguage;
         }
@@ -12530,31 +12175,26 @@ System.register("github:aurelia/templating@0.8.7/system/view-compiler", ["./reso
               return [BindingLanguage];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {
           compile: {
             value: function compile(templateOrFragment, resources) {
-              var _this = this;
               var options = arguments[2] === undefined ? defaultCompileOptions : arguments[2];
-              return (function() {
-                var instructions = [],
-                    targetShadowDOM = options.targetShadowDOM,
-                    content;
-                targetShadowDOM = targetShadowDOM && hasShadowDOM;
-                if (templateOrFragment.content) {
-                  content = document.adoptNode(templateOrFragment.content, true);
-                } else {
-                  content = templateOrFragment;
-                }
-                _this.compileNode(content, resources, instructions, templateOrFragment, "root", !targetShadowDOM);
-                content.insertBefore(document.createComment("<view>"), content.firstChild);
-                content.appendChild(document.createComment("</view>"));
-                return new ViewFactory(content, instructions, resources);
-              })();
+              var instructions = [],
+                  targetShadowDOM = options.targetShadowDOM,
+                  content;
+              targetShadowDOM = targetShadowDOM && hasShadowDOM;
+              if (templateOrFragment.content) {
+                content = document.adoptNode(templateOrFragment.content, true);
+              } else {
+                content = templateOrFragment;
+              }
+              this.compileNode(content, resources, instructions, templateOrFragment, "root", !targetShadowDOM);
+              content.insertBefore(document.createComment("<view>"), content.firstChild);
+              content.appendChild(document.createComment("</view>"));
+              return new ViewFactory(content, instructions, resources);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           compileNode: {
@@ -12582,7 +12222,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-compiler", ["./reso
               return node.nextSibling;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           compileElement: {
@@ -12638,7 +12277,7 @@ System.register("github:aurelia/templating@0.8.7/system/view-compiler", ["./reso
                 type = resources.getAttribute(info.attrName);
                 elementProperty = null;
                 if (type) {
-                  knownAttribute = resources.attributeMap[info.attrName];
+                  knownAttribute = resources.mapAttribute(info.attrName);
                   if (knownAttribute) {
                     property = type.attributes[knownAttribute];
                     if (property) {
@@ -12692,7 +12331,7 @@ System.register("github:aurelia/templating@0.8.7/system/view-compiler", ["./reso
                       type: type,
                       attributes: {}
                     };
-                    instruction.attributes[resources.attributeMap[attrName]] = attrValue;
+                    instruction.attributes[resources.mapAttribute(attrName)] = attrValue;
                     if (type.liftsContent) {
                       instruction.originalAttrName = attrName;
                       liftingInstruction = instruction;
@@ -12743,13 +12382,11 @@ System.register("github:aurelia/templating@0.8.7/system/view-compiler", ["./reso
               return node.nextSibling;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ViewCompiler;
-      })();
-      _export("ViewCompiler", ViewCompiler);
+      })());
     }
   };
 });
@@ -12803,7 +12440,7 @@ System.register("github:aurelia/route-recognizer@0.2.2", ["github:aurelia/route-
 
 
 
-System.register("github:aurelia/router@0.5.3/system/pipeline-provider", ["aurelia-dependency-injection", "./pipeline", "./navigation-plan", "./model-binding", "./route-loading", "./navigation-context", "./activation"], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/pipeline-provider", ["aurelia-dependency-injection", "./pipeline", "./navigation-plan", "./model-binding", "./route-loading", "./navigation-context", "./activation"], function(_export) {
   "use strict";
   var Container,
       Pipeline,
@@ -12874,7 +12511,7 @@ System.register("github:aurelia/router@0.5.3/system/pipeline-provider", ["aureli
 
 
 
-System.register("github:aurelia/templating-resources@0.8.4", ["github:aurelia/templating-resources@0.8.4/system/index"], function($__export) {
+System.register("github:aurelia/templating-resources@0.8.5", ["github:aurelia/templating-resources@0.8.5/system/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -12886,7 +12523,7 @@ System.register("github:aurelia/templating-resources@0.8.4", ["github:aurelia/te
 
 
 
-System.register("github:aurelia/http-client@0.4.3/system/http-client", ["aurelia-path", "./http-request-message", "./http-response-message", "./jsonp-request-message", "./headers"], function(_export) {
+System.register("github:aurelia/http-client@0.4.4/system/http-client", ["aurelia-path", "./http-request-message", "./http-response-message", "./jsonp-request-message", "./headers"], function(_export) {
   "use strict";
   var join,
       HttpRequestMessage,
@@ -12914,15 +12551,12 @@ System.register("github:aurelia/http-client@0.4.3/system/http-client", ["aurelia
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      HttpClient = (function() {
+      HttpClient = _export("HttpClient", (function() {
         function HttpClient() {
-          var _this = this;
           var baseUrl = arguments[0] === undefined ? null : arguments[0];
           var defaultRequestHeaders = arguments[1] === undefined ? new Headers() : arguments[1];
-          return (function() {
-            _this.baseUrl = baseUrl;
-            _this.defaultRequestHeaders = defaultRequestHeaders;
-          })();
+          this.baseUrl = baseUrl;
+          this.defaultRequestHeaders = defaultRequestHeaders;
         }
         _prototypeProperties(HttpClient, null, {
           send: {
@@ -12930,7 +12564,6 @@ System.register("github:aurelia/http-client@0.4.3/system/http-client", ["aurelia
               return requestMessage.send(this, progressCallback);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           get: {
@@ -12938,7 +12571,6 @@ System.register("github:aurelia/http-client@0.4.3/system/http-client", ["aurelia
               return this.send(new HttpRequestMessage("GET", join(this.baseUrl, uri)).withHeaders(this.defaultRequestHeaders));
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           put: {
@@ -12946,7 +12578,6 @@ System.register("github:aurelia/http-client@0.4.3/system/http-client", ["aurelia
               return this.send(new HttpRequestMessage("PUT", join(this.baseUrl, uri), content, replacer || this.replacer).withHeaders(this.defaultRequestHeaders));
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           patch: {
@@ -12954,7 +12585,6 @@ System.register("github:aurelia/http-client@0.4.3/system/http-client", ["aurelia
               return this.send(new HttpRequestMessage("PATCH", join(this.baseUrl, uri), content, replacer || this.replacer).withHeaders(this.defaultRequestHeaders));
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           post: {
@@ -12962,7 +12592,6 @@ System.register("github:aurelia/http-client@0.4.3/system/http-client", ["aurelia
               return this.send(new HttpRequestMessage("POST", join(this.baseUrl, uri), content, replacer || this.replacer).withHeaders(this.defaultRequestHeaders));
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           "delete": {
@@ -12970,7 +12599,6 @@ System.register("github:aurelia/http-client@0.4.3/system/http-client", ["aurelia
               return this.send(new HttpRequestMessage("DELETE", join(this.baseUrl, uri)).withHeaders(this.defaultRequestHeaders));
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           jsonp: {
@@ -12979,13 +12607,11 @@ System.register("github:aurelia/http-client@0.4.3/system/http-client", ["aurelia
               return this.send(new JSONPRequestMessage(join(this.baseUrl, uri), callbackParameterName));
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return HttpClient;
-      })();
-      _export("HttpClient", HttpClient);
+      })());
     }
   };
 });
@@ -13127,7 +12753,7 @@ System.register("github:aurelia/loader-default@0.4.1/system/index", ["aurelia-me
 
 
 
-System.register("github:aurelia/dependency-injection@0.4.1", ["github:aurelia/dependency-injection@0.4.1/system/index"], function($__export) {
+System.register("github:aurelia/dependency-injection@0.4.2", ["github:aurelia/dependency-injection@0.4.2/system/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -13139,7 +12765,7 @@ System.register("github:aurelia/dependency-injection@0.4.1", ["github:aurelia/de
 
 
 
-System.register("github:aurelia/binding@0.3.2/system/index", ["aurelia-metadata", "./value-converter", "./event-manager", "./observer-locator", "./array-change-records", "./binding-modes", "./parser", "./binding-expression", "./listener-expression", "./name-expression", "./call-expression", "./dirty-checking"], function(_export) {
+System.register("github:aurelia/binding@0.3.3/system/index", ["aurelia-metadata", "./value-converter", "./event-manager", "./observer-locator", "./array-change-records", "./binding-modes", "./parser", "./binding-expression", "./listener-expression", "./name-expression", "./call-expression", "./dirty-checking"], function(_export) {
   "use strict";
   var Metadata,
       ValueConverter;
@@ -13180,7 +12806,7 @@ System.register("github:aurelia/binding@0.3.2/system/index", ["aurelia-metadata"
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/view-engine", ["aurelia-logging", "aurelia-loader", "aurelia-path", "./view-compiler", "./resource-registry"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/view-engine", ["aurelia-logging", "aurelia-loader", "aurelia-path", "./view-compiler", "./resource-registry"], function(_export) {
   "use strict";
   var LogManager,
       Loader,
@@ -13214,7 +12840,7 @@ System.register("github:aurelia/templating@0.8.7/system/view-engine", ["aurelia-
       };
       importSplitter = /\s*,\s*/;
       logger = LogManager.getLogger("templating");
-      ViewEngine = (function() {
+      ViewEngine = _export("ViewEngine", (function() {
         function ViewEngine(loader, viewCompiler, appResources) {
           this.loader = loader;
           this.viewCompiler = viewCompiler;
@@ -13226,7 +12852,6 @@ System.register("github:aurelia/templating@0.8.7/system/view-engine", ["aurelia-
               return [Loader, ViewCompiler, ResourceRegistry];
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {
           loadViewFactory: {
@@ -13249,12 +12874,11 @@ System.register("github:aurelia/templating@0.8.7/system/view-engine", ["aurelia-
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           loadTemplateResources: {
             value: function loadTemplateResources(templateUrl, template, associatedModuleId) {
-              var _this2 = this;
+              var _this = this;
               var importIds,
                   names,
                   i,
@@ -13290,7 +12914,7 @@ System.register("github:aurelia/templating@0.8.7/system/view-engine", ["aurelia-
                   toRegister[i].register(registry, names[i]);
                 }
                 if (associatedModuleId) {
-                  associatedModule = _this2.resourceCoordinator.getExistingModuleAnalysis(associatedModuleId);
+                  associatedModule = _this.resourceCoordinator.getExistingModuleAnalysis(associatedModuleId);
                   if (associatedModule) {
                     associatedModule.register(registry);
                   }
@@ -13299,13 +12923,11 @@ System.register("github:aurelia/templating@0.8.7/system/view-engine", ["aurelia-
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return ViewEngine;
-      })();
-      _export("ViewEngine", ViewEngine);
+      })());
     }
   };
 });
@@ -13324,7 +12946,7 @@ System.register("github:aurelia/templating-binding@0.8.4", ["github:aurelia/temp
 
 
 
-System.register("github:aurelia/router@0.5.3/system/router", ["aurelia-route-recognizer", "aurelia-path", "./navigation-context", "./navigation-instruction", "./router-configuration", "./util"], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/router", ["aurelia-route-recognizer", "aurelia-path", "./navigation-context", "./navigation-instruction", "./router-configuration", "./util"], function(_export) {
   "use strict";
   var RouteRecognizer,
       join,
@@ -13423,6 +13045,8 @@ System.register("github:aurelia/router@0.5.3/system/router", ["aurelia-route-rec
           navigate: {
             value: function navigate(fragment, options) {
               fragment = join(this.baseUrl, fragment);
+              if (fragment === "")
+                fragment = "/";
               return this.history.navigate(fragment, options);
             },
             writable: true,
@@ -13604,7 +13228,7 @@ System.register("github:aurelia/router@0.5.3/system/router", ["aurelia-route-rec
 
 
 
-System.register("github:aurelia/router@0.5.3/system/app-router", ["aurelia-dependency-injection", "aurelia-history", "./router", "./pipeline-provider", "./navigation-commands"], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/app-router", ["aurelia-dependency-injection", "aurelia-history", "./router", "./pipeline-provider", "./navigation-commands"], function(_export) {
   "use strict";
   var Container,
       History,
@@ -13615,12 +13239,19 @@ System.register("github:aurelia/router@0.5.3/system/app-router", ["aurelia-depen
       _get,
       _inherits,
       AppRouter;
+  function findAnchor(el) {
+    while (el) {
+      if (el.tagName === "A")
+        return el;
+      el = el.parentNode;
+    }
+  }
   function handleLinkClick(evt) {
     if (!this.isActive) {
       return;
     }
-    var target = evt.target;
-    if (target.tagName != "A") {
+    var target = findAnchor(evt.target);
+    if (!target) {
       return;
     }
     if (this.history._hasPushState) {
@@ -13753,8 +13384,8 @@ System.register("github:aurelia/router@0.5.3/system/app-router", ["aurelia-depen
                 }
                 if (isNavigationCommand(result.output)) {
                   result.output.navigate(_this);
-                } else if (!result.completed && _this.history.previousFragment) {
-                  _this.navigate(_this.history.previousFragment, false);
+                } else if (!result.completed) {
+                  _this.navigate(_this.history.previousFragment || "", false);
                 }
                 instruction.resolve(result);
                 _this.dequeueInstruction();
@@ -13824,7 +13455,7 @@ System.register("github:aurelia/router@0.5.3/system/app-router", ["aurelia-depen
 
 
 
-System.register("github:aurelia/http-client@0.4.3/system/index", ["./http-client", "./http-request-message", "./http-response-message", "./jsonp-request-message", "./headers"], function(_export) {
+System.register("github:aurelia/http-client@0.4.4/system/index", ["./http-client", "./http-request-message", "./http-response-message", "./jsonp-request-message", "./headers"], function(_export) {
   "use strict";
   return {
     setters: [function(_httpClient) {
@@ -13856,7 +13487,7 @@ System.register("github:aurelia/loader-default@0.4.1", ["github:aurelia/loader-d
 
 
 
-System.register("github:aurelia/binding@0.3.2", ["github:aurelia/binding@0.3.2/system/index"], function($__export) {
+System.register("github:aurelia/binding@0.3.3", ["github:aurelia/binding@0.3.3/system/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -13868,7 +13499,7 @@ System.register("github:aurelia/binding@0.3.2", ["github:aurelia/binding@0.3.2/s
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/custom-element", ["aurelia-metadata", "./behavior-instance", "./behaviors", "./content-selector", "./view-engine", "./view-strategy", "./util"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/custom-element", ["aurelia-metadata", "./behavior-instance", "./behaviors", "./content-selector", "./view-engine", "./view-strategy", "./util"], function(_export) {
   "use strict";
   var Metadata,
       Origin,
@@ -13929,9 +13560,8 @@ System.register("github:aurelia/templating@0.8.7/system/custom-element", ["aurel
       contentSelectorFactoryOptions = {suppressBind: true};
       hasShadowDOM = !!HTMLElement.prototype.createShadowRoot;
       valuePropertyName = "value";
-      UseShadowDOM = function UseShadowDOM() {};
-      _export("UseShadowDOM", UseShadowDOM);
-      CustomElement = (function(ResourceType) {
+      UseShadowDOM = _export("UseShadowDOM", function UseShadowDOM() {});
+      CustomElement = _export("CustomElement", (function(ResourceType) {
         function CustomElement(tagName) {
           this.name = tagName;
           this.properties = [];
@@ -13945,7 +13575,6 @@ System.register("github:aurelia/templating@0.8.7/system/custom-element", ["aurel
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }}, {
           analyze: {
@@ -13956,7 +13585,6 @@ System.register("github:aurelia/templating@0.8.7/system/custom-element", ["aurel
               this.usesShadowDOM = this.targetShadowDOM && hasShadowDOM;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           load: {
@@ -13974,7 +13602,6 @@ System.register("github:aurelia/templating@0.8.7/system/custom-element", ["aurel
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           register: {
@@ -13982,7 +13609,6 @@ System.register("github:aurelia/templating@0.8.7/system/custom-element", ["aurel
               registry.registerElement(name || this.name, this);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           compile: {
@@ -14002,63 +13628,57 @@ System.register("github:aurelia/templating@0.8.7/system/custom-element", ["aurel
               return node;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           create: {
             value: function create(container) {
-              var _this2 = this;
               var instruction = arguments[1] === undefined ? defaultInstruction : arguments[1];
               var element = arguments[2] === undefined ? null : arguments[2];
-              return (function() {
-                var executionContext = instruction.executionContext || container.get(_this2.target),
-                    behaviorInstance = new BehaviorInstance(_this2, executionContext, instruction),
-                    host;
-                if (_this2.viewFactory) {
-                  behaviorInstance.view = _this2.viewFactory.create(container, behaviorInstance.executionContext, instruction);
-                }
-                if (element) {
-                  element.elementBehavior = behaviorInstance;
-                  element.primaryBehavior = behaviorInstance;
-                  if (behaviorInstance.view) {
-                    if (_this2.usesShadowDOM) {
-                      host = element.createShadowRoot();
-                    } else {
-                      host = element;
-                      if (instruction.contentFactory) {
-                        var contentView = instruction.contentFactory.create(container, null, contentSelectorFactoryOptions);
-                        ContentSelector.applySelectors(contentView, behaviorInstance.view.contentSelectors, function(contentSelector, group) {
-                          return contentSelector.add(group);
-                        });
-                        behaviorInstance.contentView = contentView;
-                      }
+              var executionContext = instruction.executionContext || container.get(this.target),
+                  behaviorInstance = new BehaviorInstance(this, executionContext, instruction),
+                  host;
+              if (this.viewFactory) {
+                behaviorInstance.view = this.viewFactory.create(container, behaviorInstance.executionContext, instruction);
+              }
+              if (element) {
+                element.elementBehavior = behaviorInstance;
+                element.primaryBehavior = behaviorInstance;
+                if (behaviorInstance.view) {
+                  if (this.usesShadowDOM) {
+                    host = element.createShadowRoot();
+                  } else {
+                    host = element;
+                    if (instruction.contentFactory) {
+                      var contentView = instruction.contentFactory.create(container, null, contentSelectorFactoryOptions);
+                      ContentSelector.applySelectors(contentView, behaviorInstance.view.contentSelectors, function(contentSelector, group) {
+                        return contentSelector.add(group);
+                      });
+                      behaviorInstance.contentView = contentView;
                     }
-                    if (_this2.childExpression) {
-                      behaviorInstance.view.addBinding(_this2.childExpression.createBinding(host, behaviorInstance.executionContext));
-                    }
-                    behaviorInstance.view.appendNodesTo(host);
                   }
-                } else if (behaviorInstance.view) {
-                  behaviorInstance.view.owner = behaviorInstance;
+                  if (this.childExpression) {
+                    behaviorInstance.view.addBinding(this.childExpression.createBinding(host, behaviorInstance.executionContext));
+                  }
+                  behaviorInstance.view.appendNodesTo(host);
                 }
-                return behaviorInstance;
-              })();
+              } else if (behaviorInstance.view) {
+                behaviorInstance.view.owner = behaviorInstance;
+              }
+              return behaviorInstance;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return CustomElement;
-      })(ResourceType);
-      _export("CustomElement", CustomElement);
+      })(ResourceType));
     }
   };
 });
 
 
 
-System.register("github:aurelia/router@0.5.3/system/index", ["./router", "./app-router", "./pipeline-provider", "./navigation-commands", "./route-loading", "./router-configuration", "./navigation-plan"], function(_export) {
+System.register("github:aurelia/router@0.5.4/system/index", ["./router", "./app-router", "./pipeline-provider", "./navigation-commands", "./route-loading", "./router-configuration", "./navigation-plan"], function(_export) {
   "use strict";
   return {
     setters: [function(_router) {
@@ -14084,7 +13704,7 @@ System.register("github:aurelia/router@0.5.3/system/index", ["./router", "./app-
 
 
 
-System.register("github:aurelia/http-client@0.4.3", ["github:aurelia/http-client@0.4.3/system/index"], function($__export) {
+System.register("github:aurelia/http-client@0.4.4", ["github:aurelia/http-client@0.4.4/system/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -14096,7 +13716,7 @@ System.register("github:aurelia/http-client@0.4.3", ["github:aurelia/http-client
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "aurelia-binding"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/property", ["./util", "aurelia-binding"], function(_export) {
   "use strict";
   var hyphenate,
       ONE_WAY,
@@ -14135,7 +13755,7 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
-      BehaviorProperty = (function() {
+      BehaviorProperty = _export("BehaviorProperty", (function() {
         function BehaviorProperty(name, changeHandler, attribute, defaultValue, defaultBindingMode) {
           this.name = name;
           this.changeHandler = changeHandler;
@@ -14150,7 +13770,6 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           bindingIsOneWay: {
@@ -14159,7 +13778,6 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           bindingIsOneTime: {
@@ -14168,7 +13786,6 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           define: {
@@ -14196,7 +13813,6 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           createObserver: {
@@ -14211,7 +13827,6 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               return new BehaviorPropertyObserver(this.taskQueue, executionContext, this.name, selfSubscriber);
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           initialize: {
@@ -14243,14 +13858,12 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               observer.publishing = true;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return BehaviorProperty;
-      })();
-      _export("BehaviorProperty", BehaviorProperty);
-      OptionsProperty = (function(BehaviorProperty) {
+      })());
+      OptionsProperty = _export("OptionsProperty", (function(BehaviorProperty) {
         function OptionsProperty(attribute) {
           for (var _len = arguments.length,
               rest = Array(_len > 1 ? _len - 1 : 0),
@@ -14273,7 +13886,6 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           withProperty: {
@@ -14282,7 +13894,6 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           define: {
@@ -14298,13 +13909,11 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           createObserver: {
             value: function createObserver(executionContext) {},
             writable: true,
-            enumerable: true,
             configurable: true
           },
           initialize: {
@@ -14320,7 +13929,6 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           createDynamicProperty: {
@@ -14358,13 +13966,11 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               observer.selfSubscriber = selfSubscriber;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return OptionsProperty;
-      })(BehaviorProperty);
-      _export("OptionsProperty", OptionsProperty);
+      })(BehaviorProperty));
       BehaviorPropertyObserver = (function() {
         function BehaviorPropertyObserver(taskQueue, obj, propertyName, selfSubscriber) {
           this.taskQueue = taskQueue;
@@ -14381,7 +13987,6 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               return this.currentValue;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           setValue: {
@@ -14397,7 +14002,6 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           call: {
@@ -14418,7 +14022,6 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               }
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           subscribe: {
@@ -14430,7 +14033,6 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
               };
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
@@ -14442,7 +14044,7 @@ System.register("github:aurelia/templating@0.8.7/system/property", ["./util", "a
 
 
 
-System.register("github:aurelia/router@0.5.3", ["github:aurelia/router@0.5.3/system/index"], function($__export) {
+System.register("github:aurelia/router@0.5.4", ["github:aurelia/router@0.5.4/system/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -14458,6 +14060,7 @@ System.register("dist/flickr", ["aurelia-http-client"], function(_export) {
   "use strict";
   var HttpClient,
       _prototypeProperties,
+      _classCallCheck,
       url,
       Flickr;
   return {
@@ -14471,9 +14074,15 @@ System.register("dist/flickr", ["aurelia-http-client"], function(_export) {
         if (instanceProps)
           Object.defineProperties(child.prototype, instanceProps);
       };
+      _classCallCheck = function(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError("Cannot call a class as a function");
+        }
+      };
       url = "http://api.flickr.com/services/feeds/photos_public.gne?tags=rainier&tagmode=any&format=json";
       Flickr = _export("Flickr", (function() {
         function Flickr(http) {
+          _classCallCheck(this, Flickr);
           this.heading = "Flickr";
           this.images = [];
           this.http = http;
@@ -14511,7 +14120,7 @@ System.register("dist/flickr", ["aurelia-http-client"], function(_export) {
 
 
 
-System.register("github:aurelia/templating@0.8.7/system/index", ["aurelia-metadata", "./property", "./attached-behavior", "./children", "./custom-element", "./element-config", "./template-controller", "./view-strategy", "./resource-coordinator", "./resource-registry", "./view-compiler", "./view-engine", "./view-factory", "./view-slot", "./binding-language", "./composition-engine"], function(_export) {
+System.register("github:aurelia/templating@0.8.8/system/index", ["aurelia-metadata", "./property", "./attached-behavior", "./children", "./custom-element", "./element-config", "./template-controller", "./view-strategy", "./resource-coordinator", "./resource-registry", "./view-compiler", "./view-engine", "./view-factory", "./view-slot", "./binding-language", "./composition-engine"], function(_export) {
   "use strict";
   var Metadata,
       BehaviorProperty,
@@ -14624,7 +14233,7 @@ System.register("github:aurelia/templating-router@0.9.2/system/index", ["aurelia
 
 
 
-System.register("github:aurelia/templating@0.8.7", ["github:aurelia/templating@0.8.7/system/index"], function($__export) {
+System.register("github:aurelia/templating@0.8.8", ["github:aurelia/templating@0.8.8/system/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)
@@ -14648,7 +14257,7 @@ System.register("github:aurelia/templating-router@0.9.2", ["github:aurelia/templ
 
 
 
-System.register("github:aurelia/framework@0.8.5/system/aurelia", ["aurelia-logging", "aurelia-dependency-injection", "aurelia-loader", "aurelia-templating", "./plugins"], function(_export) {
+System.register("github:aurelia/framework@0.8.6/system/aurelia", ["aurelia-logging", "aurelia-dependency-injection", "aurelia-loader", "aurelia-templating", "./plugins"], function(_export) {
   "use strict";
   var LogManager,
       Container,
@@ -14665,7 +14274,9 @@ System.register("github:aurelia/framework@0.8.5/system/aurelia", ["aurelia-loggi
       CustomEvent,
       Aurelia;
   function loadResources(container, resourcesToLoad, appResources) {
-    var next = function() {
+    var resourceCoordinator = container.get(ResourceCoordinator),
+        current;
+    function next() {
       if (current = resourcesToLoad.shift()) {
         return resourceCoordinator.importResources(current, current.resourceManifestUrl).then(function(resources) {
           resources.forEach(function(x) {
@@ -14675,9 +14286,7 @@ System.register("github:aurelia/framework@0.8.5/system/aurelia", ["aurelia-loggi
         });
       }
       return Promise.resolve();
-    };
-    var resourceCoordinator = container.get(ResourceCoordinator),
-        current;
+    }
     return next();
   }
   return {
@@ -14719,7 +14328,7 @@ System.register("github:aurelia/framework@0.8.5/system/aurelia", ["aurelia-loggi
         CustomEvent.prototype = window.Event.prototype;
         window.CustomEvent = CustomEvent;
       }
-      Aurelia = (function() {
+      Aurelia = _export("Aurelia", (function() {
         function Aurelia(loader, container, resources) {
           this.loader = loader || Loader.createDefaultLoader();
           this.container = container || new Container();
@@ -14740,7 +14349,6 @@ System.register("github:aurelia/framework@0.8.5/system/aurelia", ["aurelia-loggi
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           withSingleton: {
@@ -14749,7 +14357,6 @@ System.register("github:aurelia/framework@0.8.5/system/aurelia", ["aurelia-loggi
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           withResources: {
@@ -14760,7 +14367,6 @@ System.register("github:aurelia/framework@0.8.5/system/aurelia", ["aurelia-loggi
               return this;
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           start: {
@@ -14790,12 +14396,11 @@ System.register("github:aurelia/framework@0.8.5/system/aurelia", ["aurelia-loggi
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           },
           setRoot: {
             value: function setRoot(root, applicationHost) {
-              var _this2 = this;
+              var _this = this;
               var compositionEngine,
                   instruction = {};
               if (!applicationHost || typeof applicationHost == "string") {
@@ -14811,7 +14416,7 @@ System.register("github:aurelia/framework@0.8.5/system/aurelia", ["aurelia-loggi
               instruction.viewSlot = new ViewSlot(this.host, true);
               instruction.viewSlot.transformChildNodesIntoView();
               return compositionEngine.compose(instruction).then(function(root) {
-                _this2.root = root;
+                _this.root = root;
                 instruction.viewSlot.attached();
                 var evt = new window.CustomEvent("aurelia-composed", {
                   bubbles: true,
@@ -14820,24 +14425,22 @@ System.register("github:aurelia/framework@0.8.5/system/aurelia", ["aurelia-loggi
                 setTimeout(function() {
                   return document.dispatchEvent(evt);
                 }, 1);
-                return _this2;
+                return _this;
               });
             },
             writable: true,
-            enumerable: true,
             configurable: true
           }
         });
         return Aurelia;
-      })();
-      _export("Aurelia", Aurelia);
+      })());
     }
   };
 });
 
 
 
-System.register("github:aurelia/framework@0.8.5/system/index", ["./aurelia", "aurelia-dependency-injection", "aurelia-binding", "aurelia-metadata", "aurelia-templating", "aurelia-loader", "aurelia-task-queue", "aurelia-logging"], function(_export) {
+System.register("github:aurelia/framework@0.8.6/system/index", ["./aurelia", "aurelia-dependency-injection", "aurelia-binding", "aurelia-metadata", "aurelia-templating", "aurelia-loader", "aurelia-task-queue", "aurelia-logging"], function(_export) {
   "use strict";
   var TheLogManager,
       LogManager;
@@ -14879,7 +14482,7 @@ System.register("github:aurelia/framework@0.8.5/system/index", ["./aurelia", "au
 
 
 
-System.register("github:aurelia/framework@0.8.5", ["github:aurelia/framework@0.8.5/system/index"], function($__export) {
+System.register("github:aurelia/framework@0.8.6", ["github:aurelia/framework@0.8.6/system/index"], function($__export) {
   return {
     setters: [function(m) {
       for (var p in m)

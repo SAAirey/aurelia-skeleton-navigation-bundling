@@ -47,6 +47,7 @@
     "dependencies": {
       "aurelia-bootstrapper": "^0.9.1",
       "aurelia-dependency-injection": "^0.4.1",
+      "aurelia-event-aggregator": "^0.2.2",
       "aurelia-framework": "^0.8.4",
       "aurelia-history": "^0.2.2",
       "aurelia-history-browser": "^0.2.3",
