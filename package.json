@@ -1,6 +1,6 @@
 {
   "name": "aurelia-skeleton-navigation",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "A starter kit for building a standard navigation-style app with Aurelia.",
   "keywords": [
     "aurelia",
@@ -19,7 +19,7 @@
     "url": "http://github.com/aurelia/skeleton-navigation"
   },
   "devDependencies": {
-    "aurelia-tools": "git://github.com/aurelia/tools.git",
+    "aurelia-tools": "git+https://github.com/aurelia/tools.git",
     "browser-sync": "^1.8.1",
     "conventional-changelog": "0.0.11",
     "del": "^1.1.0",
@@ -46,7 +46,7 @@
   "jspm": {
     "dependencies": {
       "aurelia-bootstrapper": "^0.9.1",
-      "aurelia-event-aggregator": "^0.2.2",
+      "aurelia-dependency-injection": "^0.4.1",
       "aurelia-framework": "^0.8.4",
       "aurelia-history": "^0.2.2",
       "aurelia-history-browser": "^0.2.3",
